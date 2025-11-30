@@ -107,8 +107,8 @@
                     <button onclick="scrollToSection('how-it-works')" class="nav-link text-sm font-semibold hover:text-[#4292c6] transition-colors">Prototype</button>
                     <button onclick="scrollToSection('use-cases')" class="nav-link text-sm font-semibold hover:text-[#4292c6] transition-colors">Scenarios</button>
                     <button onclick="scrollToSection('technology')" class="nav-link text-sm font-semibold hover:text-[#4292c6] transition-colors">Tech</button>
-                    <button onclick="scrollToSection('ecosystem')" class="nav-link text-sm font-semibold hover:text-[#4292c6] transition-colors">Ecosystem</button>
                     <button onclick="scrollToSection('pricing')" class="nav-link text-sm font-semibold hover:text-[#4292c6] transition-colors">Business</button>
+                    <button onclick="scrollToSection('faq')" class="nav-link text-sm font-semibold hover:text-[#4292c6] transition-colors">FAQ</button>
                 </div>
                 <button onclick="scrollToSection('join-beta')" class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-slate-700 transition shadow-sm">
                     Join Beta Waitlist
@@ -560,7 +560,51 @@
             </div>
         </section>
 
-        <!-- SECTION 7: ROADMAP -->
+        <!-- SECTION 7: FAQ (New Section) -->
+        <section id="faq" class="bg-white rounded-3xl shadow-sm border border-slate-200 p-8 lg:p-12">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <h2 class="text-3xl font-bold text-slate-900">Frequently Asked Questions</h2>
+                <p class="mt-4 text-slate-600">Addressing common questions about data privacy, reliability, and our technology.</p>
+            </div>
+
+            <div class="space-y-6 max-w-4xl mx-auto">
+                
+                <!-- FAQ Item 1 -->
+                <div class="border border-slate-200 rounded-xl p-6 bg-slate-50">
+                    <h4 class="font-bold text-slate-900 text-lg mb-2">How do you get data from apps like Tinder or Uber without an API?</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        We use an "Over-the-Top" integration strategy. Most modern apps allow users to share content (rides, profiles, listings) via public web links. Tether simply acts as the recipient of that share action, parsing the public web page for the necessary metadata (Location, Time, Identity) without needing backend access to the source app.
+                    </p>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="border border-slate-200 rounded-xl p-6 bg-slate-50">
+                    <h4 class="font-bold text-slate-900 text-lg mb-2">Won't this trigger constant false alarms?</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        No. We utilize a <strong>Graded Response System</strong>. We don't call the police the moment a timer hits zero. First, we send a vibration nudge (Grade 1). Then, a local device alarm (Grade 2). Only after multiple failures to respond do we escalate to your social circle (Grade 3) or authorities (Grade 4 - Premium).
+                    </p>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="border border-slate-200 rounded-xl p-6 bg-slate-50">
+                    <h4 class="font-bold text-slate-900 text-lg mb-2">Can you actually track an Uber ride without their API?</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Yes. When you share a "Trip Status" link from Uber or Lyft, it opens a public web view of your ride. Tether parses this to get your destination. Additionally, our <strong>Route Monitor</strong> feature uses your phone's own GPS to detect if you stop unexpectedly or deviate significantly from the optimal route to that destination.
+                    </p>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="border border-slate-200 rounded-xl p-6 bg-slate-50">
+                    <h4 class="font-bold text-slate-900 text-lg mb-2">Why wouldn't I just text a friend?</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Friends fall asleep, forget to check their phones, or hesitate to "overreact." Tether is an automated <strong>Dead Man's Switch</strong> that never sleeps. Furthermore, Tether instantly uploads photo evidence (license plates, faces) to a secure cloud vault, ensuring it is preserved even if your phone is lost or damaged—something a text message cannot guarantee.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 8: ROADMAP -->
         <section id="roadmap" class="bg-slate-900 text-white rounded-3xl p-8 lg:p-12">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <div>
