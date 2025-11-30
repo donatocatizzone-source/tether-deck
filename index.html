@@ -3,44 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tether: Proof of Concept Deck</title>
+    <title>Tether: Proof of Concept</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <style>
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background-color: #f8fafc; /* Slate-50 - Professional, clean background */
-            color: #1e293b; /* Slate-800 - High contrast text */
+            background-color: #f8fafc; /* Slate-50 - Cool, professional background */
+            color: #0f172a; /* Slate-900 */
             scroll-behavior: smooth;
         }
 
+        /* Custom Brand Color Utility */
+        .text-brand { color: #4292c6; }
+        .bg-brand { background-color: #4292c6; }
+        .border-brand { border-color: #4292c6; }
+        
+        /* The Requested Blue-Green Gradient */
+        .bg-brand-gradient {
+            background: linear-gradient(135deg, #4292c6 0%, #2dd4bf 100%); /* #4292c6 to Teal-400 */
+        }
+        .text-brand-gradient {
+            background: linear-gradient(135deg, #4292c6 0%, #2dd4bf 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
         .glass-panel {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(226, 232, 240, 0.8);
         }
 
         .nav-link.active {
-            color: #0f172a;
-            border-bottom: 2px solid #ea580c; /* Orange-600 */
-        }
-
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 100%; /* Allow full width within grid cols */
-            height: 300px;
-            max-height: 400px;
+            color: #4292c6;
+            border-bottom: 2px solid #4292c6;
         }
 
         /* Phone Simulator Styling */
         .phone-frame {
-            border: 12px solid #1e293b;
+            border: 12px solid #1e293b; /* Slate-800 */
             border-radius: 2.5rem;
             overflow: hidden;
             background: #fff;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 25px 50px -12px rgba(66, 146, 198, 0.25); /* Blue shadow glow */
             position: relative;
             z-index: 10;
         }
@@ -50,7 +57,7 @@
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 50%;
+            width: 40%;
             height: 24px;
             background: #1e293b;
             border-bottom-left-radius: 12px;
@@ -58,75 +65,52 @@
             z-index: 20;
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 3px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
+        .fade-enter { opacity: 0; transform: translateY(10px); transition: opacity 0.3s ease, transform 0.3s ease; }
+        .fade-enter-active { opacity: 1; transform: translateY(0); }
+
+        /* Beta Ribbon */
+        .beta-ribbon {
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: #4292c6;
+            color: white;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 0.7rem;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 50;
         }
 
-        .fade-enter {
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-        .fade-enter-active {
-            opacity: 1;
-            transform: translateY(0);
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            height: 250px;
         }
     </style>
-    <!-- Chosen Palette: Corporate Trust & Urgency
-         Background: #f8fafc (Slate 50)
-         Primary Text: #1e293b (Slate 800)
-         Accent/Brand: #ea580c (Orange 600 - Alert/Safety/Action)
-         Secondary: #3b82f6 (Blue 500 - Trust/Tech)
-         Success: #10b981 (Emerald 500)
-         Danger: #ef4444 (Red 500)
-    -->
-
-    <!-- Application Structure Plan:
-         1. Executive Summary (Hero): Defines "The Safety Gap" immediately. High-level value prop.
-         2. The Product (Demo): Interactive "Dead Man's Switch" simulation to prove the core mechanic.
-         3. Technology (The Secret Sauce): Detailed breakdown of the "No-API" Share Sheet parser and OCR fallback.
-         4. Market Strategy (Business Model): Visualizing the "Churn" problem and the Hybrid Solution (Pay-Per-Mission).
-         5. Scalability (Modes & Future): Radar charts for risk profiles and the B2B "Verified Safety" pivot.
-    -->
-
-    <!-- Visualization & Content Choices:
-         1. Radar Chart (Chart.js): Comparing Risk Profiles (Marketplace vs Date vs Ride) to justify distinct feature sets.
-         2. Doughnut Chart (Chart.js): Visualizing the "Churn" bottleneck (High Freq vs Low Freq users) to support the Hybrid Model.
-         3. Interactive Phone (Vanilla JS): Simulates the "Reverse Check-In" workflow. Essential for understanding the UX.
-         4. Tech Stack Flow (HTML/CSS): Visualizing the "Over-The-Top" integration strategy (Share Sheet -> Parser -> Tether).
-    -->
-
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </head>
-<body class="antialiased">
+<body class="antialiased selection:bg-teal-100 selection:text-teal-900">
 
     <!-- Sticky Navigation -->
     <nav class="sticky top-0 z-50 glass-panel border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 bg-orange-600 rounded-lg flex items-center justify-center text-white font-bold">T</div>
-                    <span class="text-xl font-bold tracking-tight text-slate-900">Tether</span>
+                    <!-- Gradient Logo Icon -->
+                    <div class="w-8 h-8 bg-brand-gradient rounded-lg flex items-center justify-center text-white font-bold shadow-sm">T</div>
+                    <span class="text-xl font-bold tracking-tight text-slate-900">Tether <span class="text-xs font-normal text-slate-500 ml-1 border border-slate-300 px-2 py-0.5 rounded-full">POC v0.1</span></span>
                 </div>
                 <div class="hidden md:flex space-x-8">
-                    <button onclick="scrollToSection('executive-summary')" class="nav-link active text-sm font-semibold hover:text-orange-600 transition-colors">Executive Summary</button>
-                    <button onclick="scrollToSection('product-demo')" class="nav-link text-sm font-semibold hover:text-orange-600 transition-colors">Product Demo</button>
-                    <button onclick="scrollToSection('technology')" class="nav-link text-sm font-semibold hover:text-orange-600 transition-colors">Technology</button>
-                    <button onclick="scrollToSection('business-model')" class="nav-link text-sm font-semibold hover:text-orange-600 transition-colors">Business Model</button>
+                    <button onclick="scrollToSection('mission')" class="nav-link active text-sm font-semibold hover:text-[#4292c6] transition-colors">The Mission</button>
+                    <button onclick="scrollToSection('how-it-works')" class="nav-link text-sm font-semibold hover:text-[#4292c6] transition-colors">Prototype</button>
+                    <button onclick="scrollToSection('use-cases')" class="nav-link text-sm font-semibold hover:text-[#4292c6] transition-colors">Scenarios</button>
+                    <button onclick="scrollToSection('technology')" class="nav-link text-sm font-semibold hover:text-[#4292c6] transition-colors">Technology</button>
+                    <button onclick="scrollToSection('pricing')" class="nav-link text-sm font-semibold hover:text-[#4292c6] transition-colors">Business</button>
                 </div>
-                <button class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-slate-800 transition shadow-sm">
-                    Invest Now
+                <button onclick="scrollToSection('join-beta')" class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-slate-700 transition shadow-sm">
+                    Join Beta Waitlist
                 </button>
             </div>
         </div>
@@ -134,118 +118,117 @@
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-24">
 
-        <!-- SECTION 1: EXECUTIVE SUMMARY -->
-        <section id="executive-summary" class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[60vh]">
-            <div class="space-y-6">
-                <div class="inline-block px-3 py-1 bg-orange-100 text-orange-700 text-xs font-bold uppercase tracking-wide rounded-full">
-                    The Problem
+        <!-- SECTION 1: THE MISSION (Expanded Copy) -->
+        <section id="mission" class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[70vh]">
+            <div class="space-y-8">
+                <div class="inline-block px-3 py-1 bg-sky-100 text-[#4292c6] text-xs font-bold uppercase tracking-wide rounded-full">
+                    Concept Preview
                 </div>
-                <h1 class="text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight">
-                    The Agnostic Safety Layer for the Physical World
+                
+                <h1 class="text-4xl lg:text-6xl font-extrabold text-slate-900 leading-tight">
+                    Don't meet strangers <span class="text-brand-gradient">alone.</span>
                 </h1>
-                <p class="text-lg text-slate-600 leading-relaxed">
-                    Digital platforms are "Walled Gardens." Tinder doesn't know you're in an Uber. Uber doesn't know you're meeting a Craigslist seller. 
-                    <br><br>
-                    <strong>Tether bridges "The Safety Gap"</strong>—the critical window between online interaction and the first few minutes of a physical meeting. We sit on top of the gig economy apps, providing a universal, agnostic safety net.
-                </p>
+                
+                <div class="space-y-6 text-lg text-slate-600 leading-relaxed">
+                    <p>
+                        Your digital apps connect you, but they don't protect you in the real world. Tinder doesn't know you're in an Uber. Uber doesn't know you're meeting a Craigslist seller. This creates a <strong>"Safety Gap"</strong>—a critical window where you are vulnerable, offline, and disconnected from your safety network.
+                    </p>
+                    <p>
+                        Tether is the universal safety layer that sits above them all. Unlike a panic button that requires you to react during a crisis, Tether acts as a <strong>"Dead Man's Switch."</strong> We monitor your status proactively and alert your trusted circle automatically if you don't check in safely. It’s proactive protection for the gig economy, modern dating, and solo travel.
+                    </p>
+                </div>
+
                 <div class="flex gap-4 pt-4">
-                    <div class="flex flex-col border-l-4 border-orange-500 pl-4">
-                        <span class="text-2xl font-bold text-slate-900">85%</span>
-                        <span class="text-sm text-slate-500">Market is "Occasional Users"</span>
-                    </div>
-                    <div class="flex flex-col border-l-4 border-slate-300 pl-4">
-                        <span class="text-2xl font-bold text-slate-900">No API</span>
-                        <span class="text-sm text-slate-500">Required for Integration</span>
+                    <button onclick="scrollToSection('how-it-works')" class="bg-brand-gradient text-white px-6 py-3 rounded-lg font-bold hover:opacity-90 transition shadow-lg shadow-sky-200">
+                        Test the Simulator
+                    </button>
+                    <div class="flex items-center gap-2 text-slate-500 text-sm">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        Working Concept
                     </div>
                 </div>
             </div>
             
             <div class="relative bg-white rounded-2xl shadow-xl border border-slate-100 p-8 overflow-hidden">
-                <div class="absolute top-0 right-0 p-4 opacity-10">
-                    <span class="text-9xl">🛡️</span>
-                </div>
-                <h3 class="text-lg font-bold text-slate-800 mb-6">The Walled Garden Problem</h3>
+                <div class="beta-ribbon">BETA</div>
+                <h3 class="text-lg font-bold text-slate-800 mb-6">Bridging the Safety Gap</h3>
                 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-center">
-                        <div class="text-pink-500 font-bold mb-1">Dating Apps</div>
-                        <div class="text-xs text-slate-400">Locked Data</div>
-                        <div class="mt-2 text-xs bg-white p-2 rounded border border-slate-100">"We matched"</div>
+                <div class="flex justify-between items-center mb-8 relative">
+                    <!-- The Apps -->
+                    <div class="flex flex-col gap-4 z-10">
+                        <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 text-center w-32 opacity-50">
+                            <span class="block text-xs font-bold">Dating Apps</span>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 text-center w-32 opacity-50">
+                            <span class="block text-xs font-bold">Ride Apps</span>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 text-center w-32 opacity-50">
+                            <span class="block text-xs font-bold">Marketplace</span>
+                        </div>
                     </div>
-                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-center">
-                        <div class="text-slate-900 font-bold mb-1">Ride Apps</div>
-                        <div class="text-xs text-slate-400">Locked Data</div>
-                        <div class="mt-2 text-xs bg-white p-2 rounded border border-slate-100">"En route"</div>
-                    </div>
-                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-center">
-                        <div class="text-blue-600 font-bold mb-1">Marketplace</div>
-                        <div class="text-xs text-slate-400">Locked Data</div>
-                        <div class="mt-2 text-xs bg-white p-2 rounded border border-slate-100">"Sold item"</div>
-                    </div>
-                </div>
 
-                <div class="bg-slate-900 text-white p-4 rounded-xl text-center relative z-10 shadow-lg transform transition hover:scale-[1.02]">
-                    <div class="font-bold text-lg mb-1">TETHER</div>
-                    <div class="text-sm text-slate-400">The Agnostic "Dead Man's Switch"</div>
-                    <div class="mt-4 flex justify-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                        <span class="text-xs">Active Monitoring Across All Platforms</span>
+                    <!-- The Gap Visual -->
+                    <div class="flex-1 border-b-2 border-dashed border-red-300 mx-4 relative top-0 text-center">
+                        <span class="text-xs text-red-500 bg-white px-2 relative -top-3 font-bold">THE REAL WORLD</span>
+                    </div>
+
+                    <!-- Tether -->
+                    <div class="z-10">
+                        <div class="p-4 bg-brand-gradient text-white rounded-xl text-center w-32 shadow-xl">
+                            <div class="font-bold text-lg">TETHER</div>
+                            <div class="text-[10px] text-white/80 mt-1">The Safety Net</div>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Connector Lines (CSS Only) -->
-                <div class="absolute inset-0 z-0 pointer-events-none flex justify-center items-center">
-                     <!-- Visual connectors would go here, simplified layout implies connection -->
+                <div class="bg-sky-50 p-4 rounded-lg text-sm text-sky-900 border border-sky-100">
+                    <strong>The Goal:</strong> To build a tool that works <em>across</em> all apps without needing their permission, ensuring you are never truly alone.
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 2: PRODUCT DEMO (SIMULATION) -->
-        <section id="product-demo" class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+        <!-- SECTION 2: HOW IT WORKS (SIMULATOR) -->
+        <section id="how-it-works" class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-0">
                 
-                <!-- Simulator Controls & Context -->
-                <div class="lg:col-span-7 p-8 lg:p-12 space-y-8">
+                <!-- Simulator Context -->
+                <div class="lg:col-span-7 p-8 lg:p-12 space-y-8 order-2 lg:order-1">
                     <div>
-                        <h2 class="text-3xl font-bold text-slate-900">Core Mechanic: Reverse Check-In</h2>
+                        <h2 class="text-3xl font-bold text-slate-900">Try the Prototype</h2>
                         <p class="mt-4 text-slate-600">
-                            Traditional safety apps require the user to panic-press a button. Tether assumes danger unless told otherwise.
+                            Experience the core mechanic right now. Click the steps below to simulate a real-world scenario.
                         </p>
                     </div>
 
-                    <div class="space-y-6">
-                        <div id="step-1" class="flex gap-4 p-4 rounded-xl bg-orange-50 border border-orange-100 transition-all cursor-pointer" onclick="setSimStage('setup')">
-                            <div class="w-8 h-8 rounded-full bg-orange-600 text-white flex items-center justify-center font-bold flex-shrink-0">1</div>
+                    <div class="space-y-4">
+                        <div id="step-1" class="group flex gap-4 p-4 rounded-xl bg-sky-50 border border-sky-100 transition-all cursor-pointer hover:shadow-md" onclick="setSimStage('setup')">
+                            <div class="w-8 h-8 rounded-full bg-brand text-white flex items-center justify-center font-bold flex-shrink-0">1</div>
                             <div>
-                                <h4 class="font-bold text-slate-900">The Tether (Setup)</h4>
-                                <p class="text-sm text-slate-600">User inputs "Who" (Photo/Profile) and "Where" (Location Link). Evidence is securely locked in the cloud immediately.</p>
+                                <h4 class="font-bold text-slate-900 group-hover:text-[#4292c6]">Arm the Tether</h4>
+                                <p class="text-sm text-slate-600">You share your location link and a photo. We lock it in a secure cloud vault.</p>
                             </div>
                         </div>
 
-                        <div id="step-2" class="flex gap-4 p-4 rounded-xl hover:bg-slate-50 transition-all cursor-pointer opacity-60" onclick="setSimStage('countdown')">
-                            <div class="w-8 h-8 rounded-full bg-slate-300 text-slate-600 flex items-center justify-center font-bold flex-shrink-0">2</div>
+                        <div id="step-2" class="group flex gap-4 p-4 rounded-xl border border-transparent hover:bg-slate-50 transition-all cursor-pointer opacity-60 hover:opacity-100" onclick="setSimStage('countdown')">
+                            <div class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center font-bold flex-shrink-0 group-hover:bg-slate-300">2</div>
                             <div>
                                 <h4 class="font-bold text-slate-900">The Countdown</h4>
-                                <p class="text-sm text-slate-600">GPS tracking active. At T-10 mins, the app nudges: "Are you safe?" Allows for discrete extension.</p>
+                                <p class="text-sm text-slate-600">If you don't check in by the set time, we nudge you gently first.</p>
                             </div>
                         </div>
 
-                        <div id="step-3" class="flex gap-4 p-4 rounded-xl hover:bg-slate-50 transition-all cursor-pointer opacity-60" onclick="setSimStage('breach')">
-                            <div class="w-8 h-8 rounded-full bg-slate-300 text-slate-600 flex items-center justify-center font-bold flex-shrink-0">3</div>
+                        <div id="step-3" class="group flex gap-4 p-4 rounded-xl border border-transparent hover:bg-slate-50 transition-all cursor-pointer opacity-60 hover:opacity-100" onclick="setSimStage('breach')">
+                            <div class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center font-bold flex-shrink-0 group-hover:bg-slate-300">3</div>
                             <div>
-                                <h4 class="font-bold text-slate-900">Escalation Protocol</h4>
-                                <p class="text-sm text-slate-600">
-                                    <strong>Grade 1:</strong> Device Alarm.<br>
-                                    <strong>Grade 3:</strong> Social Alert (SMS to Safety Circle).<br>
-                                    <strong>Grade 4:</strong> 911 Dispatch (Premium).
-                                </p>
+                                <h4 class="font-bold text-slate-900">The Alert</h4>
+                                <p class="text-sm text-slate-600">If you are silent, we send your location and the evidence to your trusted contacts.</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- The Interactive Phone -->
-                <div class="lg:col-span-5 bg-slate-100 p-8 flex items-center justify-center border-l border-slate-200">
+                <div class="lg:col-span-5 bg-slate-100 p-8 flex items-center justify-center border-l border-slate-200 order-1 lg:order-2">
                     <div class="phone-frame w-72 h-[580px]">
                         <div class="notch"></div>
                         <div id="phone-content" class="h-full bg-white relative overflow-hidden flex flex-col">
@@ -257,176 +240,238 @@
             </div>
         </section>
 
-        <!-- SECTION 3: TECHNOLOGY (NO-API & PRIVACY) -->
-        <section id="technology" class="space-y-12">
-            <div class="text-center max-w-3xl mx-auto">
-                <div class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold uppercase tracking-wide rounded-full mb-4">
-                    Technological Feasibility
+        <!-- SECTION 3: USE CASES (SCENARIOS) -->
+        <section id="use-cases" class="space-y-8">
+            <div class="text-center max-w-2xl mx-auto">
+                <h2 class="text-3xl font-bold text-slate-900">One App, Three Modes</h2>
+                <p class="mt-4 text-slate-600">We're testing specific features for different types of anxiety. Which one do you need most?</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Marketplace Mode -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-brand transition-colors">
+                    <div class="h-10 w-10 bg-sky-100 text-[#4292c6] rounded-lg flex items-center justify-center text-xl mb-4">🛍️</div>
+                    <h3 class="font-bold text-lg mb-2">Marketplace Mode</h3>
+                    <p class="text-sm text-slate-500 mb-4">For selling items to strangers.</p>
+                    <div class="bg-slate-50 p-3 rounded-lg text-xs">
+                        <strong>POC Feature:</strong> "Evidence Locker" uploads a photo of their license plate <em>before</em> you get in the car.
+                    </div>
                 </div>
-                <h2 class="text-3xl font-bold text-slate-900">Over-The-Top Integration</h2>
+
+                <!-- Dating Mode -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-brand transition-colors">
+                    <div class="h-10 w-10 bg-teal-100 text-teal-600 rounded-lg flex items-center justify-center text-xl mb-4">🥂</div>
+                    <h3 class="font-bold text-lg mb-2">Dating Mode</h3>
+                    <p class="text-sm text-slate-500 mb-4">For meeting new matches.</p>
+                    <div class="bg-slate-50 p-3 rounded-lg text-xs">
+                        <strong>POC Feature:</strong> "Get Out" button triggers a fake incoming call from your "Landlord" for a polite exit.
+                    </div>
+                </div>
+
+                <!-- Ride Mode -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-brand transition-colors">
+                    <div class="h-10 w-10 bg-indigo-100 text-indigo-600 rounded-lg flex items-center justify-center text-xl mb-4">🚖</div>
+                    <h3 class="font-bold text-lg mb-2">Ride Mode</h3>
+                    <p class="text-sm text-slate-500 mb-4">For solo travel & rideshares.</p>
+                    <div class="bg-slate-50 p-3 rounded-lg text-xs">
+                        <strong>POC Feature:</strong> Route monitoring alerts you if the driver stops unexpectedly or goes off-course.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: TECHNICAL VALIDATION -->
+        <section id="technology" class="bg-white rounded-3xl shadow-sm border border-slate-200 p-8 lg:p-12">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <div class="inline-block px-3 py-1 bg-teal-50 text-teal-700 text-xs font-bold uppercase tracking-wide rounded-full mb-4">
+                    Tech Audit Passed
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900">Technical Validation</h2>
                 <p class="mt-4 text-slate-600">
-                    We don't need permission from Uber or Tinder. We use "Side Door" workarounds to access data the user voluntarily shares.
+                    We conducted a feasibility study to prove we can access critical data (Location, Photos, Identity) without official API access. 
+                    We use <strong>"Share Sheet Parsing"</strong> to bridge the gap.
                 </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Tech Card 1: Share Sheet -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="p-3 bg-green-100 rounded-lg text-2xl">📲</div>
-                        <h3 class="text-xl font-bold text-slate-900">The "Share Sheet" Parser</h3>
-                    </div>
-                    <p class="text-sm text-slate-600 mb-6">
-                        Our validated MVP tech. The user clicks "Share Trip" or "Share Listing" in the source app and selects Tether. We parse the public web link.
-                    </p>
-                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 space-y-3">
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm font-semibold">Tinder "Share My Date"</span>
-                            <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">Passed</span>
+                <!-- Share Sheet Audit Results -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                    <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                        <span>🔗</span> Link Parsing Tests
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center p-3 bg-white rounded-lg border border-slate-100 shadow-sm">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded flex items-center justify-center font-bold text-xs">FB</div>
+                                <div>
+                                    <div class="text-sm font-bold text-slate-900">Marketplace</div>
+                                    <div class="text-xs text-slate-500">Extracts: Photo, Price, City</div>
+                                </div>
+                            </div>
+                            <span class="px-2 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded">PASSED</span>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm font-semibold">Apple Maps Pin</span>
-                            <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">Passed</span>
+                        <div class="flex justify-between items-center p-3 bg-white rounded-lg border border-slate-100 shadow-sm">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-gray-100 text-gray-600 rounded flex items-center justify-center font-bold text-xs"></div>
+                                <div>
+                                    <div class="text-sm font-bold text-slate-900">Apple Maps</div>
+                                    <div class="text-xs text-slate-500">Extracts: Exact GPS Lat/Long</div>
+                                </div>
+                            </div>
+                            <span class="px-2 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded">PASSED</span>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm font-semibold">FB Marketplace Link</span>
-                            <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">Passed</span>
+                        <div class="flex justify-between items-center p-3 bg-white rounded-lg border border-slate-100 shadow-sm">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-pink-100 text-pink-600 rounded flex items-center justify-center font-bold text-xs">🔥</div>
+                                <div>
+                                    <div class="text-sm font-bold text-slate-900">Tinder Date</div>
+                                    <div class="text-xs text-slate-500">Extracts: Name, Photo, Time</div>
+                                </div>
+                            </div>
+                            <span class="px-2 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded">PASSED</span>
                         </div>
-                        <div class="text-xs text-slate-400 mt-2 italic">* Validated via technical audit. Data (Lat/Long, Photo) is accessible.</div>
                     </div>
                 </div>
 
-                <!-- Tech Card 2: OCR Fallback -->
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="p-3 bg-blue-100 rounded-lg text-2xl">👁️</div>
-                        <h3 class="text-xl font-bold text-slate-900">OCR & Privacy Shield</h3>
-                    </div>
+                <!-- OCR Fallback -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                    <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                        <span>👁️</span> The "No-Link" Fallback
+                    </h3>
                     <p class="text-sm text-slate-600 mb-6">
-                        For apps without links, on-device AI scans screenshots for keywords ("7pm", "Starbucks").
+                        For apps that don't support link sharing, we use on-device <strong>OCR (Optical Character Recognition)</strong>.
                     </p>
-                    
-                    <div class="space-y-4">
-                        <div class="flex gap-3">
-                            <div class="w-1 h-full bg-orange-500 rounded"></div>
-                            <div>
-                                <h4 class="text-sm font-bold text-slate-800">Privacy First</h4>
-                                <p class="text-xs text-slate-500">Data is encrypted and auto-deleted after 24 hours if no emergency is triggered. We hold sensitive data only when it matters.</p>
-                            </div>
+                    <div class="relative bg-white p-4 rounded-xl border border-slate-200 overflow-hidden">
+                        <div class="absolute top-2 right-2 text-xs font-mono text-slate-300">SCANNING...</div>
+                        <div class="space-y-2 opacity-50">
+                            <div class="h-2 bg-slate-200 w-3/4 rounded"></div>
+                            <div class="h-2 bg-slate-200 w-1/2 rounded"></div>
                         </div>
-                        <div class="flex gap-3">
-                            <div class="w-1 h-full bg-orange-500 rounded"></div>
-                            <div>
-                                <h4 class="text-sm font-bold text-slate-800">Smart Battery Management</h4>
-                                <p class="text-xs text-slate-500">Adaptive GPS pinging. Frequency increases only as the timer nears expiration to preserve battery.</p>
-                            </div>
+                        <div class="mt-4 p-3 bg-sky-50 rounded border border-sky-100 text-xs">
+                            <strong>Detected:</strong> "Meet at <span class="bg-sky-200">Starbucks on Main</span> at <span class="bg-sky-200">7pm</span>"
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 4: BUSINESS MODEL & MARKET -->
-        <section id="business-model" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- SECTION 5: PRICING & BUSINESS MODEL -->
+        <section id="pricing" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <!-- Chart: The Churn Problem -->
             <div class="lg:col-span-2 bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-                <h3 class="text-xl font-bold text-slate-900 mb-2">The Churn Solution</h3>
-                <p class="text-sm text-slate-600 mb-6">
-                    Most safety apps fail because users churn when they aren't dating or selling. A monthly subscription only captures 15% of the market.
-                </p>
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-2">Sustainable Business Model</h3>
+                    <p class="text-sm text-slate-600">
+                        Safety apps traditionally fail due to high churn: users leave when they aren't actively dating or selling. Tether's hybrid model captures the entire market.
+                    </p>
+                </div>
+                
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                     <div class="chart-container">
                         <canvas id="churnChart"></canvas>
                     </div>
                     <div class="space-y-4">
-                        <div class="p-4 bg-orange-50 rounded-xl border border-orange-100">
-                            <h4 class="font-bold text-orange-800">Pay-Per-Mission ($0.99)</h4>
-                            <p class="text-xs text-orange-700 mt-1">Captures the 85% "Occasional User". Impulse buy at moment of anxiety. High margin.</p>
+                        <div class="p-4 bg-sky-50 rounded-xl border border-sky-100">
+                            <h4 class="font-bold text-[#4292c6] text-lg">Pay-Per-Mission ($0.99)</h4>
+                            <p class="text-xs text-sky-800 mt-1">Captures the 85% "Occasional User". An impulse buy at the moment of anxiety. High margin, low barrier.</p>
                         </div>
                         <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
-                            <h4 class="font-bold text-slate-800">Gig Subscription ($9.99/mo)</h4>
-                            <p class="text-xs text-slate-600 mt-1">For Realtors, Drivers, Power Sellers. Includes tax receipts & unlimited missions.</p>
+                            <h4 class="font-bold text-slate-800 text-lg">Gig Subscription ($9.99/mo)</h4>
+                            <p class="text-xs text-slate-600 mt-1">For Realtors, Drivers, and Power Sellers. Includes automated tax receipts & unlimited missions.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Future Pivot -->
+            <!-- Future Pivot / Guardian Model -->
             <div class="bg-slate-900 text-white p-8 rounded-2xl shadow-xl flex flex-col justify-between">
                 <div>
-                    <div class="text-orange-500 font-bold tracking-wider text-xs mb-2">FUTURE B2B PIVOT</div>
-                    <h3 class="text-2xl font-bold mb-4">"Verified Safety" Badge</h3>
+                    <div class="text-[#4292c6] font-bold tracking-wider text-xs mb-2">FUTURE GROWTH</div>
+                    <h3 class="text-2xl font-bold mb-4">The "Guardian" Model</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-6">
+                        We monetize the protector's anxiety, not the user's. Parents pay the subscription; the app remains free for the teen.
+                    </p>
+                    <h3 class="text-xl font-bold mb-4 mt-8">B2B Trust API</h3>
                     <p class="text-sm text-slate-400 leading-relaxed">
-                        Users build a "Vouch Score" by completing safe meetups. We license this trust API to platforms.
+                        Users build a "Vouch Score" by completing safe meetups. We license this trust badge back to Tinder and Marketplace.
                     </p>
                 </div>
                 <div class="mt-8 bg-slate-800 p-4 rounded-lg border border-slate-700 text-center">
-                    <div class="text-xs text-slate-400 mb-2">Mock Profile Badge</div>
+                    <div class="text-xs text-slate-400 mb-2">Profile Integration</div>
                     <div class="inline-flex items-center gap-2 bg-white text-slate-900 px-3 py-1 rounded-full text-xs font-bold">
-                        <span class="text-green-500">✓</span> Vouched by Tether
+                        <span class="text-green-600">✓</span> Vouched by Tether
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 5: MODES & RISK PROFILES -->
-        <section id="modes" class="space-y-8">
-            <h2 class="text-2xl font-bold text-slate-900">Tailored Risk Profiles</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                
-                <!-- Marketplace Mode -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="font-bold text-lg">Marketplace Mode</h3>
-                        <span class="text-xs bg-slate-100 px-2 py-1 rounded">High Risk / Short</span>
-                    </div>
-                    <p class="text-xs text-slate-500 mb-4 h-10">Transactional. Meeting strangers at home. High theft risk.</p>
-                    <div class="chart-container" style="height: 200px;">
-                        <canvas id="radarMarketplace"></canvas>
-                    </div>
-                    <div class="mt-4 p-3 bg-slate-50 rounded-lg">
-                        <span class="text-xs font-bold text-slate-700">Feature: Evidence Locker</span>
-                        <p class="text-[10px] text-slate-500">Instant cloud upload of license plate/buyer photo.</p>
-                    </div>
-                </div>
-
-                <!-- Dating Mode -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="font-bold text-lg">Dating Mode</h3>
-                        <span class="text-xs bg-slate-100 px-2 py-1 rounded">Med Risk / Long</span>
-                    </div>
-                    <p class="text-xs text-slate-500 mb-4 h-10">Social pressure. Hard to leave politely. </p>
-                    <div class="chart-container" style="height: 200px;">
-                        <canvas id="radarDating"></canvas>
-                    </div>
-                    <div class="mt-4 p-3 bg-slate-50 rounded-lg">
-                        <span class="text-xs font-bold text-slate-700">Feature: "Get Out" Card</span>
-                        <p class="text-[10px] text-slate-500">Triggers fake "Landlord Emergency" call for exit.</p>
-                    </div>
-                </div>
-
-                <!-- Ride Mode -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="font-bold text-lg">Ride Mode</h3>
-                        <span class="text-xs bg-slate-100 px-2 py-1 rounded">Variable Risk</span>
-                    </div>
-                    <p class="text-xs text-slate-500 mb-4 h-10">Helplessness. Trapped in vehicle. Route integrity key.</p>
-                    <div class="chart-container" style="height: 200px;">
-                        <canvas id="radarRide"></canvas>
-                    </div>
-                    <div class="mt-4 p-3 bg-slate-50 rounded-lg">
-                        <span class="text-xs font-bold text-slate-700">Feature: Route Monitor</span>
-                        <p class="text-[10px] text-slate-500">Alerts on significant route deviation or stops.</p>
+        <!-- SECTION 6: ROADMAP -->
+        <section id="roadmap" class="bg-slate-900 text-white rounded-3xl p-8 lg:p-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <h2 class="text-3xl font-bold mb-4">Project Roadmap</h2>
+                    <p class="text-slate-400 mb-8">We are building this in public. Here is what is ready to test and what is coming next.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="flex flex-col items-center">
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                <div class="w-0.5 h-full bg-slate-700 my-1"></div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-green-400">Phase 1: The Logic (Current)</h4>
+                                <p class="text-sm text-slate-400">Validated parsing of Facebook Marketplace & Apple Maps links. Timer logic functional.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex flex-col items-center">
+                                <div class="w-3 h-3 bg-[#4292c6] rounded-full"></div>
+                                <div class="w-0.5 h-full bg-slate-700 my-1"></div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-[#4292c6]">Phase 2: The Beta App</h4>
+                                <p class="text-sm text-slate-400">iOS TestFlight release. "Share Sheet" integration for 1-tap protection.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex flex-col items-center">
+                                <div class="w-3 h-3 bg-slate-600 rounded-full"></div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-500">Phase 3: Live Monitoring</h4>
+                                <p class="text-sm text-slate-400">Integration with 911 dispatch APIs for verified emergencies.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
+                <div id="join-beta" class="bg-slate-800 p-8 rounded-2xl border border-slate-700 flex flex-col justify-center">
+                    <h3 class="text-2xl font-bold mb-2">Help us test Tether</h3>
+                    <p class="text-slate-400 text-sm mb-6">We are looking for 100 beta testers to help us refine the safety triggers. No spam, just updates.</p>
+                    
+                    <form class="space-y-4" onsubmit="event.preventDefault(); alert('Thanks! You are on the list.');">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Email Address</label>
+                            <input type="email" placeholder="you@example.com" class="w-full bg-slate-900 border border-slate-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#4292c6]">
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <input type="checkbox" id="tester" class="mt-1">
+                            <label for="tester" class="text-xs text-slate-400">I'm willing to provide feedback on the prototype.</label>
+                        </div>
+                        <button class="w-full bg-brand-gradient hover:opacity-90 text-white font-bold py-3 rounded-lg transition">
+                            Join Beta Waitlist
+                        </button>
+                    </form>
+                </div>
             </div>
         </section>
 
         <footer class="text-center py-12 border-t border-slate-200 mt-12">
-            <p class="text-slate-400 text-sm">&copy; 2025 Tether Inc. Proof of Concept Deck.</p>
+            <p class="text-slate-400 text-sm">&copy; 2025 Tether Project. Proof of Concept v0.1</p>
+            <div class="flex justify-center gap-4 mt-4">
+                <a href="#" class="text-xs text-slate-500 hover:text-slate-800">Privacy Policy</a>
+                <a href="#" class="text-xs text-slate-500 hover:text-slate-800">Contact Dev Team</a>
+            </div>
         </footer>
 
     </main>
@@ -436,22 +481,15 @@
         function scrollToSection(id) {
             const el = document.getElementById(id);
             if (el) {
-                const offset = 80; // height of sticky nav + padding
+                const offset = 80;
                 const bodyRect = document.body.getBoundingClientRect().top;
                 const elementRect = el.getBoundingClientRect().top;
                 const elementPosition = elementRect - bodyRect;
                 const offsetPosition = elementPosition - offset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
-                });
+                window.scrollTo({ top: offsetPosition, behavior: "smooth" });
             }
-            
-            // Update Active State
             document.querySelectorAll('.nav-link').forEach(btn => btn.classList.remove('active'));
-            // Find the button that triggered this (if click) or set manually
-            event.target.classList.add('active');
+            if(event.target.classList.contains('nav-link')) event.target.classList.add('active');
         }
 
         // --- PHONE SIMULATOR LOGIC ---
@@ -461,69 +499,59 @@
             setup: `
                 <div class="p-6 h-full flex flex-col fade-enter-active">
                     <div class="flex-1 flex flex-col justify-center items-center space-y-6">
-                        <div class="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center text-3xl">🛡️</div>
+                        <div class="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center text-3xl shadow-inner">🛡️</div>
                         <div class="text-center">
                             <h3 class="text-xl font-bold text-slate-900">New Session</h3>
                             <p class="text-sm text-slate-500">Marketplace Meetup</p>
                         </div>
                         <div class="w-full space-y-3">
-                            <div class="bg-green-50 text-green-700 p-3 rounded-lg text-sm flex items-center gap-2 border border-green-100">
-                                <span>✓</span> Location Link Parsed
+                            <div class="bg-teal-50 text-teal-700 p-3 rounded-lg text-sm flex items-center gap-2 border border-teal-100">
+                                <span>✓</span> Location: 123 Main St
                             </div>
-                            <div class="bg-green-50 text-green-700 p-3 rounded-lg text-sm flex items-center gap-2 border border-green-100">
-                                <span>✓</span> Evidence Secured
+                            <div class="bg-teal-50 text-teal-700 p-3 rounded-lg text-sm flex items-center gap-2 border border-teal-100">
+                                <span>✓</span> Photo: License Plate
                             </div>
                         </div>
                     </div>
                     <button onclick="setSimStage('countdown')" class="w-full bg-slate-900 text-white py-4 rounded-xl font-bold shadow-lg hover:bg-slate-800 transition">
-                        Arm Tether (30m)
+                        Start Protection (30m)
                     </button>
                 </div>
             `,
             countdown: `
                 <div class="h-full bg-slate-900 text-white p-6 flex flex-col items-center justify-center relative fade-enter-active">
-                    <div class="absolute top-4 right-4 text-xs text-slate-500">GPS Active</div>
+                    <div class="absolute top-4 right-4 text-xs text-slate-500 flex items-center gap-1">
+                        <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span> GPS Live
+                    </div>
                     
                     <div class="w-48 h-48 rounded-full border-4 border-slate-700 flex items-center justify-center mb-8 relative">
-                        <div class="text-4xl font-mono font-bold tracking-widest">29:59</div>
-                        <div class="absolute -top-1 right-8 w-3 h-3 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_#22c55e]"></div>
+                        <div class="text-4xl font-mono font-bold tracking-widest text-emerald-400">29:59</div>
                     </div>
 
+                    <p class="text-slate-400 text-sm text-center mb-8">We are monitoring your location. We will nudge you in 20 minutes.</p>
+
                     <div class="space-y-4 w-full">
-                        <button onclick="setSimStage('warning')" class="w-full py-3 bg-slate-800 rounded-lg text-sm font-semibold hover:bg-slate-700 text-slate-300">
-                            Simulate T-10 Warning
-                        </button>
-                        <div class="grid grid-cols-2 gap-4">
-                            <button class="py-3 bg-slate-800 rounded-lg text-sm font-semibold text-slate-400">Extend</button>
-                            <button onclick="setSimStage('setup')" class="py-3 bg-green-600 rounded-lg text-sm font-semibold shadow-lg hover:bg-green-500">I'm Safe</button>
+                         <div class="grid grid-cols-2 gap-4">
+                            <button onclick="setSimStage('setup')" class="py-3 bg-brand-gradient rounded-lg text-sm font-semibold shadow-lg hover:opacity-90 text-white">I'm Safe</button>
+                            <button class="py-3 bg-slate-800 rounded-lg text-sm font-semibold text-slate-400">Extend Time</button>
                         </div>
+                        <button onclick="setSimStage('breach')" class="w-full py-2 text-xs text-slate-600 underline hover:text-slate-400">
+                            Simulate Emergency (Dev Only)
+                        </button>
                     </div>
-                </div>
-            `,
-            warning: `
-                <div class="h-full bg-orange-500 text-white p-6 flex flex-col items-center justify-center fade-enter-active">
-                    <div class="text-6xl mb-6 animate-bounce">⚠️</div>
-                    <h3 class="text-2xl font-bold mb-2">Check In</h3>
-                    <p class="text-center opacity-90 mb-12">Timer expires in 10 minutes.<br>Are you safe?</p>
-                    
-                    <button onclick="setSimStage('setup')" class="w-full bg-white text-orange-600 py-4 rounded-xl font-bold shadow-lg mb-4">
-                        Yes, I'm Safe
-                    </button>
-                    <button onclick="setSimStage('breach')" class="text-sm underline opacity-75 hover:opacity-100">
-                        Test Breach (Ignore)
-                    </button>
                 </div>
             `,
             breach: `
                 <div class="h-full bg-red-600 text-white p-6 flex flex-col items-center justify-center text-center fade-enter-active">
                     <div class="text-6xl mb-4 animate-ping">🚨</div>
                     <h3 class="text-2xl font-bold mb-2">ALERT SENT</h3>
+                    <p class="text-white/80 text-sm mb-8">We contacted your Safety Circle because you didn't check in.</p>
                     <div class="bg-red-800/50 p-4 rounded-xl text-sm text-left w-full mb-8 border border-red-400/30">
-                        <div class="text-xs text-red-200 mb-1">To: Safety Circle</div>
-                        "SOS: Missed check-in. Last GPS: [Link]. Meeting 'Mike'. Photo attached."
+                        <div class="text-xs text-red-200 mb-1">Sent to: Mom, Partner</div>
+                        "Help: I missed my check-in. Last GPS: [Link]. Meeting 'Mike'. Photo attached."
                     </div>
                     <button onclick="setSimStage('setup')" class="w-full border-2 border-white/20 py-3 rounded-xl font-semibold hover:bg-white/10">
-                        Reset Demo
+                        Reset Simulator
                     </button>
                 </div>
             `
@@ -532,62 +560,45 @@
         function setSimStage(stage) {
             phoneContent.innerHTML = simStages[stage];
             
-            // Update UI highlights
+            // Update UI highlights (Simulator Steps)
             ['step-1', 'step-2', 'step-3'].forEach(id => {
-                document.getElementById(id).classList.add('opacity-60');
-                document.getElementById(id).classList.remove('bg-orange-50', 'border-orange-100', 'opacity-100');
-                // Reset bubbles
-                document.getElementById(id).querySelector('div').classList.remove('bg-orange-600', 'text-white');
-                document.getElementById(id).querySelector('div').classList.add('bg-slate-300', 'text-slate-600');
+                const el = document.getElementById(id);
+                el.classList.add('opacity-60', 'border-transparent');
+                el.classList.remove('bg-sky-50', 'border-sky-100', 'opacity-100');
+                el.querySelector('div').classList.remove('bg-brand', 'text-white');
+                el.querySelector('div').classList.add('bg-slate-200', 'text-slate-600');
             });
 
             // Highlight current step
             let activeId = '';
             if (stage === 'setup') activeId = 'step-1';
-            if (stage === 'countdown' || stage === 'warning') activeId = 'step-2';
+            if (stage === 'countdown') activeId = 'step-2';
             if (stage === 'breach') activeId = 'step-3';
 
             if (activeId) {
                 const el = document.getElementById(activeId);
-                el.classList.remove('opacity-60');
-                el.classList.add('bg-orange-50', 'border', 'border-orange-100');
-                el.querySelector('div').classList.remove('bg-slate-300', 'text-slate-600');
-                el.querySelector('div').classList.add('bg-orange-600', 'text-white');
+                el.classList.remove('opacity-60', 'border-transparent');
+                el.classList.add('bg-sky-50', 'border-sky-100', 'opacity-100');
+                el.querySelector('div').classList.remove('bg-slate-200', 'text-slate-600');
+                el.querySelector('div').classList.add('bg-brand', 'text-white');
             }
         }
 
         // Initialize Simulator
         setSimStage('setup');
 
-
         // --- CHARTS ---
-
-        // Common Chart Options
         Chart.defaults.font.family = "'Inter', sans-serif";
-        Chart.defaults.color = '#64748b';
-        
-        const radarOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                r: {
-                    angleLines: { display: false },
-                    grid: { color: '#e2e8f0' },
-                    pointLabels: { font: { size: 10, weight: 'bold' }, color: '#475569' },
-                    ticks: { display: false, max: 100 }
-                }
-            },
-            plugins: { legend: { display: false } }
-        };
+        Chart.defaults.color = '#64748b'; // Slate-500
 
-        // 1. Churn / Market Doughnut
+        // Churn / Market Doughnut
         new Chart(document.getElementById('churnChart'), {
             type: 'doughnut',
             data: {
                 labels: ['Occasional Users (85%)', 'Power Users (15%)'],
                 datasets: [{
                     data: [85, 15],
-                    backgroundColor: ['#f97316', '#cbd5e1'], // Orange-500, Slate-300
+                    backgroundColor: ['#4292c6', '#e2e8f0'], // Brand Blue, Slate-200
                     borderWidth: 0,
                     hoverOffset: 4
                 }]
@@ -600,65 +611,17 @@
                     datalabels: {
                         color: '#fff',
                         font: { weight: 'bold' },
-                        formatter: (value) => value + '%'
+                        formatter: (value, ctx) => {
+                            let label = ctx.chart.data.labels[ctx.dataIndex];
+                            if(label.includes('Power')) return '15%';
+                            return '85%';
+                        }
                     }
                 },
                 cutout: '60%'
             },
             plugins: [ChartDataLabels]
         });
-
-        // 2. Risk Radars (Mini)
-        const radarLabels = ['Danger', 'Duration', 'Social Pressure', 'Helplessness', 'Freq'];
-        
-        // Marketplace
-        new Chart(document.getElementById('radarMarketplace'), {
-            type: 'radar',
-            data: {
-                labels: radarLabels,
-                datasets: [{
-                    data: [80, 20, 30, 40, 20],
-                    backgroundColor: 'rgba(59, 130, 246, 0.2)', // Blue
-                    borderColor: '#3b82f6',
-                    borderWidth: 2,
-                    pointRadius: 0
-                }]
-            },
-            options: radarOptions
-        });
-
-        // Dating
-        new Chart(document.getElementById('radarDating'), {
-            type: 'radar',
-            data: {
-                labels: radarLabels,
-                datasets: [{
-                    data: [50, 90, 90, 30, 60],
-                    backgroundColor: 'rgba(236, 72, 153, 0.2)', // Pink
-                    borderColor: '#ec4899',
-                    borderWidth: 2,
-                    pointRadius: 0
-                }]
-            },
-            options: radarOptions
-        });
-
-        // Ride
-        new Chart(document.getElementById('radarRide'), {
-            type: 'radar',
-            data: {
-                labels: radarLabels,
-                datasets: [{
-                    data: [60, 50, 20, 80, 70],
-                    backgroundColor: 'rgba(234, 179, 8, 0.2)', // Yellow
-                    borderColor: '#eab308',
-                    borderWidth: 2,
-                    pointRadius: 0
-                }]
-            },
-            options: radarOptions
-        });
-
     </script>
 </body>
 </html>
