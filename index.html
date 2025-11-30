@@ -105,8 +105,8 @@
                 <div class="hidden md:flex space-x-8">
                     <button onclick="scrollToSection('mission')" class="nav-link active text-sm font-semibold hover:text-[#4292c6] transition-colors">The Mission</button>
                     <button onclick="scrollToSection('how-it-works')" class="nav-link text-sm font-semibold hover:text-[#4292c6] transition-colors">Prototype</button>
-                    <button onclick="scrollToSection('use-cases')" class="nav-link text-sm font-semibold hover:text-[#4292c6] transition-colors">Scenarios</button>
-                    <button onclick="scrollToSection('technology')" class="nav-link text-sm font-semibold hover:text-[#4292c6] transition-colors">Technology</button>
+                    <button onclick="scrollToSection('technology')" class="nav-link text-sm font-semibold hover:text-[#4292c6] transition-colors">Tech</button>
+                    <button onclick="scrollToSection('ecosystem')" class="nav-link text-sm font-semibold hover:text-[#4292c6] transition-colors">Ecosystem</button>
                     <button onclick="scrollToSection('pricing')" class="nav-link text-sm font-semibold hover:text-[#4292c6] transition-colors">Business</button>
                 </div>
                 <button onclick="scrollToSection('join-beta')" class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-slate-700 transition shadow-sm">
@@ -118,7 +118,7 @@
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-24">
 
-        <!-- SECTION 1: THE MISSION (Expanded Copy) -->
+        <!-- SECTION 1: THE MISSION -->
         <section id="mission" class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[70vh]">
             <div class="space-y-8">
                 <div class="inline-block px-3 py-1 bg-sky-100 text-[#4292c6] text-xs font-bold uppercase tracking-wide rounded-full">
@@ -131,7 +131,7 @@
                 
                 <div class="space-y-6 text-lg text-slate-600 leading-relaxed">
                     <p>
-                        Your digital apps connect you, but they don't protect you in the real world. Tinder doesn't know you're in an Uber. Uber doesn't know you're meeting a Craigslist seller. This creates a <strong>"Safety Gap"</strong>, a critical window where you are vulnerable, offline, and disconnected from your safety network.
+                        Your digital apps connect you, but they don't protect you in the real world. Tinder doesn't know you're in an Uber. Uber doesn't know you're meeting a Craigslist seller. This creates a <strong>"Safety Gap"</strong>—a critical window where you are vulnerable, offline, and disconnected from your safety network.
                     </p>
                     <p>
                         Tether is the universal safety layer that sits above them all. Unlike a panic button that requires you to react during a crisis, Tether acts as a <strong>"Dead Man's Switch."</strong> We monitor your status proactively and alert your trusted circle automatically if you don't check in safely. It’s proactive protection for the gig economy, modern dating, and solo travel.
@@ -174,6 +174,7 @@
 
                     <!-- Tether -->
                     <div class="z-10">
+                        <!-- New Blue Gradient Card -->
                         <div class="p-4 bg-brand-gradient text-white rounded-xl text-center w-32 shadow-xl">
                             <div class="font-bold text-lg">TETHER</div>
                             <div class="text-[10px] text-white/80 mt-1">The Safety Net</div>
@@ -355,7 +356,99 @@
             </div>
         </section>
 
-        <!-- SECTION 5: PRICING & BUSINESS MODEL -->
+        <!-- SECTION 5: THE ECOSYSTEM (New Section) -->
+        <section id="ecosystem" class="space-y-12">
+            <div class="text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold text-slate-900">The Tether Ecosystem</h2>
+                <p class="mt-4 text-slate-600">
+                    We aren't just an app; we are an infrastructure layer. Tether works across the entire physical internet, from dating to the gig economy.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <!-- Consumer Core (MVP) -->
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-8">
+                    <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                        <span class="p-2 bg-pink-100 rounded-lg">❤️</span> Consumer Core
+                    </h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- Item -->
+                        <div class="p-3 border border-slate-100 rounded-lg flex justify-between items-center">
+                            <span class="text-sm font-semibold">Tinder / Bumble</span>
+                            <span class="text-[10px] bg-slate-100 px-2 py-1 rounded text-slate-500">🔗 Link Parse</span>
+                        </div>
+                        <!-- Item -->
+                        <div class="p-3 border border-slate-100 rounded-lg flex justify-between items-center">
+                            <span class="text-sm font-semibold">Uber / Lyft</span>
+                            <span class="text-[10px] bg-slate-100 px-2 py-1 rounded text-slate-500">🔗 Link Parse</span>
+                        </div>
+                        <!-- Item -->
+                        <div class="p-3 border border-slate-100 rounded-lg flex justify-between items-center">
+                            <span class="text-sm font-semibold">Facebook Market</span>
+                            <span class="text-[10px] bg-slate-100 px-2 py-1 rounded text-slate-500">🔗 Link Parse</span>
+                        </div>
+                        <!-- Item -->
+                        <div class="p-3 border border-slate-100 rounded-lg flex justify-between items-center">
+                            <span class="text-sm font-semibold">Craigslist</span>
+                            <span class="text-[10px] bg-blue-50 px-2 py-1 rounded text-blue-600">👁️ OCR Only</span>
+                        </div>
+                        <!-- Item -->
+                        <div class="p-3 border border-slate-100 rounded-lg flex justify-between items-center">
+                            <span class="text-sm font-semibold">Airbnb (Rooms)</span>
+                            <span class="text-[10px] bg-slate-100 px-2 py-1 rounded text-slate-500">🔗 Link Parse</span>
+                        </div>
+                        <!-- Item -->
+                        <div class="p-3 border border-slate-100 rounded-lg flex justify-between items-center">
+                            <span class="text-sm font-semibold">Grindr / Scruff</span>
+                            <span class="text-[10px] bg-blue-50 px-2 py-1 rounded text-blue-600">👁️ OCR Only</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gig Economy (Subscription) -->
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-8">
+                    <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                        <span class="p-2 bg-blue-100 rounded-lg">💼</span> Gig Economy (B2B)
+                    </h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- Item -->
+                        <div class="p-3 border border-slate-100 rounded-lg flex justify-between items-center">
+                            <span class="text-sm font-semibold">Zillow / Redfin</span>
+                            <span class="text-[10px] bg-slate-100 px-2 py-1 rounded text-slate-500">🔗 Link Parse</span>
+                        </div>
+                        <!-- Item -->
+                        <div class="p-3 border border-slate-100 rounded-lg flex justify-between items-center">
+                            <span class="text-sm font-semibold">Rover / Wag</span>
+                            <span class="text-[10px] bg-slate-100 px-2 py-1 rounded text-slate-500">🔗 Link Parse</span>
+                        </div>
+                        <!-- Item -->
+                        <div class="p-3 border border-slate-100 rounded-lg flex justify-between items-center">
+                            <span class="text-sm font-semibold">TaskRabbit</span>
+                            <span class="text-[10px] bg-blue-50 px-2 py-1 rounded text-blue-600">👁️ OCR Only</span>
+                        </div>
+                        <!-- Item -->
+                        <div class="p-3 border border-slate-100 rounded-lg flex justify-between items-center">
+                            <span class="text-sm font-semibold">DoorDash / UberEats</span>
+                            <span class="text-[10px] bg-slate-100 px-2 py-1 rounded text-slate-500">🔗 Link Parse</span>
+                        </div>
+                        <!-- Item -->
+                        <div class="p-3 border border-slate-100 rounded-lg flex justify-between items-center">
+                            <span class="text-sm font-semibold">Care.com</span>
+                            <span class="text-[10px] bg-blue-50 px-2 py-1 rounded text-blue-600">👁️ OCR Only</span>
+                        </div>
+                        <!-- Item -->
+                        <div class="p-3 border border-slate-100 rounded-lg flex justify-between items-center">
+                            <span class="text-sm font-semibold">Realtor.com</span>
+                            <span class="text-[10px] bg-slate-100 px-2 py-1 rounded text-slate-500">🔗 Link Parse</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 6: PRICING & BUSINESS MODEL -->
         <section id="pricing" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <!-- Chart: The Churn Problem -->
             <div class="lg:col-span-2 bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
@@ -405,7 +498,7 @@
             </div>
         </section>
 
-        <!-- SECTION 6: ROADMAP -->
+        <!-- SECTION 7: ROADMAP -->
         <section id="roadmap" class="bg-slate-900 text-white rounded-3xl p-8 lg:p-12">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <div>
