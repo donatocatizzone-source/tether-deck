@@ -106,8 +106,8 @@
                     <button onclick="scrollToSection('mission')" class="nav-link active text-sm font-semibold hover:text-[#4292c6] transition-colors">Mission</button>
                     <button onclick="scrollToSection('how-it-works')" class="nav-link text-sm font-semibold hover:text-[#4292c6] transition-colors">Demo</button>
                     <button onclick="scrollToSection('technology')" class="nav-link text-sm font-semibold hover:text-[#4292c6] transition-colors">Tech</button>
+                    <button onclick="scrollToSection('market')" class="nav-link text-sm font-semibold hover:text-[#4292c6] transition-colors">Market</button>
                     <button onclick="scrollToSection('pricing')" class="nav-link text-sm font-semibold hover:text-[#4292c6] transition-colors">Business</button>
-                    <button onclick="scrollToSection('gtm')" class="nav-link text-sm font-semibold hover:text-[#4292c6] transition-colors">GTM</button>
                     <button onclick="scrollToSection('faq')" class="nav-link text-sm font-semibold hover:text-[#4292c6] transition-colors">FAQ</button>
                 </div>
                 <button onclick="scrollToSection('join-beta')" class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-slate-700 transition shadow-sm">
@@ -523,7 +523,7 @@
             </div>
         </section>
 
-        <!-- SECTION 6: COMPETITIVE LANDSCAPE (New Section) -->
+        <!-- SECTION 6: COMPETITIVE LANDSCAPE -->
         <section id="comparison" class="bg-slate-900 text-white rounded-3xl p-8 lg:p-12">
             <div class="text-center max-w-3xl mx-auto mb-10">
                 <h2 class="text-3xl font-bold text-white">Why Tether Wins</h2>
@@ -582,7 +582,36 @@
             </div>
         </section>
 
-        <!-- SECTION 7: PRICING & BUSINESS MODEL -->
+        <!-- SECTION 7: MARKET OPPORTUNITY (NEW SECTION) -->
+        <section id="market" class="space-y-12">
+            <div class="text-center max-w-3xl mx-auto">
+                <div class="inline-block px-3 py-1 bg-green-100 text-green-700 text-xs font-bold uppercase tracking-wide rounded-full mb-4">
+                    Market Validation
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900">A $12 Billion Problem</h2>
+                <p class="mt-4 text-slate-600">The "Safety Gap" is not just a feature request; it is a massive, underserved market driven by the explosion of the Gig Economy.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center">
+                    <div class="text-4xl font-black text-slate-900 mb-2">$12.4B</div>
+                    <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-4">Safety Tech Market by 2030</div>
+                    <p class="text-sm text-slate-600">Personal safety devices and apps are one of the fastest-growing sectors in consumer tech.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center relative overflow-hidden">
+                    <div class="text-4xl font-black text-[#4292c6] mb-2">491M</div>
+                    <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-4">Monthly Marketplace Shoppers</div>
+                    <p class="text-sm text-slate-600">Facebook Marketplace alone has nearly half a billion users meeting strangers locally.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center">
+                    <div class="text-4xl font-black text-slate-900 mb-2">53%</div>
+                    <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-4">Young Adults on Dating Apps</div>
+                    <p class="text-sm text-slate-600">The majority of Gen Z/Millennials use dating apps, making "stranger danger" a daily reality.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 8: PRICING & BUSINESS MODEL -->
         <section id="pricing" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <!-- Chart: The Churn Problem -->
             <div class="lg:col-span-2 bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
@@ -632,7 +661,7 @@
             </div>
         </section>
 
-        <!-- SECTION 8: GO-TO-MARKET STRATEGY -->
+        <!-- SECTION 9: GO-TO-MARKET STRATEGY -->
         <section id="gtm" class="space-y-12">
             <div class="text-center max-w-3xl mx-auto">
                 <h2 class="text-3xl font-bold text-slate-900">Go-To-Market Strategy</h2>
@@ -678,7 +707,7 @@
             </div>
         </section>
 
-        <!-- SECTION 9: FAQ -->
+        <!-- SECTION 10: FAQ -->
         <section id="faq" class="bg-white rounded-3xl shadow-sm border border-slate-200 p-8 lg:p-12">
             <div class="text-center max-w-3xl mx-auto mb-10">
                 <h2 class="text-3xl font-bold text-slate-900">Frequently Asked Questions</h2>
@@ -722,9 +751,9 @@
             </div>
         </section>
 
-        <!-- SECTION 10: ROADMAP -->
+        <!-- SECTION 11: ROADMAP & INVESTOR CTA -->
         <section id="roadmap" class="bg-slate-900 text-white rounded-3xl p-8 lg:p-12">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
                 <div>
                     <h2 class="text-3xl font-bold mb-4">Project Roadmap</h2>
                     <p class="text-slate-400 mb-8">We are building this in public. Here is what is ready to test and what is coming next.</p>
@@ -781,18 +810,29 @@
                     </form>
                 </div>
             </div>
-        </section>
 
-        <footer class="text-center py-12 border-t border-slate-200 mt-12">
-            <p class="text-slate-400 text-sm">&copy; 2025 Tether Project. Proof of Concept v0.1</p>
-            <div class="flex justify-center gap-4 mt-4">
-                <a href="#" class="text-xs text-slate-500 hover:text-slate-800">Privacy Policy</a>
-                <a href="#" class="text-xs text-slate-500 hover:text-slate-800">Contact Dev Team</a>
+            <!-- Investor Footer -->
+            <div class="border-t border-slate-800 pt-8 mt-12 flex flex-col md:flex-row justify-between items-center text-slate-400 text-sm">
+                <div>
+                    <p>&copy; 2025 Tether Project. Proof of Concept v0.1</p>
+                    <div class="flex gap-4 mt-2">
+                        <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                        <a href="#" class="hover:text-white transition">Terms of Service</a>
+                    </div>
+                </div>
+                <div class="mt-6 md:mt-0 flex flex-col items-end">
+                    <span class="text-xs font-bold uppercase tracking-widest text-[#4292c6] mb-2">Investor Relations</span>
+                    <a href="mailto:invest@tether.app" class="flex items-center gap-2 hover:text-white transition group">
+                        <span>Contact for Pitch Deck</span>
+                        <span class="group-hover:translate-x-1 transition-transform">→</span>
+                    </a>
+                </div>
             </div>
-            <p class="text-[10px] text-slate-400 mt-8 max-w-lg mx-auto">
+            
+            <p class="text-[10px] text-slate-600 mt-8 text-center max-w-lg mx-auto">
                 Disclaimer: Tether is a concept application. The "911 Dispatch" features described are planned integrations for future phases and are not currently active. Always dial 911 directly in an emergency.
             </p>
-        </footer>
+        </section>
 
     </main>
 
