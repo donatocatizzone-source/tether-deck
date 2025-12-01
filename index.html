@@ -300,78 +300,7 @@
         <!-- SECTION 2.5: FEATURE SPOTLIGHT (DATING) -->
         <section id="feature-spotlight" class="bg-slate-900 text-white rounded-3xl p-8 lg:p-12 overflow-hidden relative mb-24">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div class="z-10">
-                    <div class="inline-block px-3 py-1 bg-[#4292c6] text-white text-xs font-bold uppercase tracking-wide rounded-full mb-4">
-                        Dating Mode Exclusive
-                    </div>
-                    <h2 class="text-3xl font-bold mb-4">The "Get Out" Button</h2>
-                    <p class="text-slate-400 mb-8 leading-relaxed">
-                        Stuck in a bad date or feeling unsafe? Trigger a realistic "Emergency Call" to give yourself a polite, indisputable excuse to leave. 
-                        <br><br>
-                        Click the button on the phone below to test the animation.
-                    </p>
-                    <div class="p-4 bg-slate-800 rounded-xl border border-slate-700">
-                        <h4 class="font-bold text-white mb-1">Psychological Safety</h4>
-                        <p class="text-xs text-slate-400">Removing the social pressure of "being polite" allows users to exit dangerous situations earlier.</p>
-                    </div>
-                </div>
-
-                <!-- Fake Call Simulator -->
-                <div class="flex justify-center z-10">
-                    <div class="phone-frame w-64 h-[500px] border-gray-800 shadow-2xl bg-black">
-                        <div id="fake-call-ui" class="h-full w-full relative bg-slate-900 overflow-hidden">
-                            <!-- Screen 1: Trigger -->
-                            <div id="fc-screen-idle" class="h-full flex flex-col justify-center items-center p-6 space-y-6">
-                                <div class="text-center">
-                                    <h4 class="text-white font-bold">Dating Mode Active</h4>
-                                    <p class="text-xs text-slate-500 mt-1">Monitoring "Gabe"</p>
-                                </div>
-                                <button onclick="triggerFakeCall()" class="w-24 h-24 rounded-full bg-red-500/20 border-2 border-red-500 text-red-500 flex flex-col items-center justify-center hover:bg-red-500 hover:text-white transition-all duration-300 group">
-                                    <span class="text-2xl mb-1">📞</span>
-                                    <span class="text-[10px] font-bold uppercase">Trigger Call</span>
-                                </button>
-                                <p class="text-[10px] text-slate-600 text-center">Tap to schedule a call in 5s</p>
-                            </div>
-
-                            <!-- Screen 2: Incoming Call -->
-                            <div id="fc-screen-incoming" class="hidden h-full flex flex-col justify-between p-8 bg-gray-900 bg-[url('https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60')] bg-cover bg-center relative">
-                                <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
-                                <div class="relative z-10 flex flex-col items-center mt-12">
-                                    <div class="w-20 h-20 bg-gray-300 rounded-full flex items-center justify-center text-3xl mb-4 border-2 border-white/20">🏠</div>
-                                    <h3 class="text-2xl font-bold text-white">Landlord</h3>
-                                    <p class="text-white/80">Mobile</p>
-                                </div>
-                                <div class="relative z-10 grid grid-cols-2 gap-8 mb-8">
-                                    <div class="flex flex-col items-center gap-2">
-                                        <button onclick="resetFakeCall()" class="w-16 h-16 rounded-full bg-red-500 flex items-center justify-center text-2xl hover:scale-110 transition">✕</button>
-                                        <span class="text-xs text-white">Decline</span>
-                                    </div>
-                                    <div class="flex flex-col items-center gap-2">
-                                        <button onclick="acceptFakeCall()" class="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center text-2xl hover:scale-110 transition">📞</button>
-                                        <span class="text-xs text-white">Accept</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Screen 3: Active Call -->
-                            <div id="fc-screen-active" class="hidden h-full flex flex-col items-center pt-20 bg-gray-900">
-                                <div class="w-24 h-24 bg-gray-700 rounded-full flex items-center justify-center text-4xl mb-4">🏠</div>
-                                <h3 class="text-2xl font-bold text-white">Landlord</h3>
-                                <p class="text-white/60 mb-12" id="call-timer">00:00</p>
-                                <div class="grid grid-cols-3 gap-4 w-full px-6 mb-8">
-                                    <div class="flex flex-col items-center"><div class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-white">🔇</div></div>
-                                    <div class="flex flex-col items-center"><div class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-white">⌨️</div></div>
-                                    <div class="flex flex-col items-center"><div class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-white">🔊</div></div>
-                                </div>
-                                <button onclick="resetFakeCall()" class="w-16 h-16 rounded-full bg-red-500 flex items-center justify-center text-2xl hover:bg-red-600 transition">📞</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 2.6: RIDE MODE DEMO (NEW SECTION) -->
+        <!-- SECTION 2.6: RIDE MODE DEMO -->
         <section id="ride-demo" class="bg-slate-50 rounded-3xl shadow-sm border border-slate-200 p-8 lg:p-12 overflow-hidden mb-24">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <!-- Text / Explanation -->
@@ -437,6 +366,77 @@
             </div>
         </section>
 
+        <!-- SECTION 2.7: MARKETPLACE DEMO (NEW SECTION) -->
+        <section id="marketplace-demo" class="bg-slate-900 text-white rounded-3xl p-8 lg:p-12 overflow-hidden mb-24">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="z-10">
+                    <div class="inline-block px-3 py-1 bg-sky-500 text-white text-xs font-bold uppercase tracking-wide rounded-full mb-4">
+                        Marketplace Mode Exclusive
+                    </div>
+                    <h2 class="text-3xl font-bold mb-4">The Evidence Locker</h2>
+                    <p class="text-slate-400 mb-8 leading-relaxed">
+                        When selling online, the highest risk is meeting the stranger. Tether lets you snap a photo of a license plate or buyer that uploads <strong>instantly to the cloud</strong>. 
+                        <br><br>
+                        Even if your phone is stolen or smashed, the evidence is already secure.
+                    </p>
+                    <div class="p-4 bg-slate-800 rounded-xl border border-slate-700">
+                        <h4 class="font-bold text-white mb-1">Zero-Knowledge Encryption</h4>
+                        <p class="text-xs text-slate-400">Photos are encrypted on-device before upload. We can't see them unless you trigger an SOS.</p>
+                    </div>
+                </div>
+
+                <!-- Interactive Camera Demo -->
+                <div class="flex justify-center z-10">
+                    <div class="phone-frame w-64 h-[500px] border-gray-800 shadow-2xl bg-black relative">
+                        <!-- Flash Overlay -->
+                        <div id="cam-flash" class="absolute inset-0 bg-white opacity-0 pointer-events-none z-50 transition-opacity duration-100"></div>
+
+                        <!-- Viewfinder UI -->
+                        <div id="cam-viewfinder" class="h-full w-full relative bg-slate-800 flex flex-col">
+                            <!-- Header -->
+                            <div class="p-4 flex justify-between items-center bg-black/20 backdrop-blur absolute top-0 w-full z-10">
+                                <span class="text-xs font-bold">EVIDENCE LOCKER</span>
+                                <span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                            </div>
+                            
+                            <!-- Camera Preview (Simulated) -->
+                            <div class="flex-1 bg-[url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60')] bg-cover bg-center relative">
+                                <div class="absolute inset-0 border-2 border-white/30 m-8 rounded-lg">
+                                    <div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-white"></div>
+                                    <div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-white"></div>
+                                    <div class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-white"></div>
+                                    <div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-white"></div>
+                                </div>
+                            </div>
+
+                            <!-- Controls -->
+                            <div class="h-32 bg-black flex flex-col items-center justify-center p-4 space-y-2">
+                                <button onclick="captureEvidence()" class="w-16 h-16 rounded-full border-4 border-white p-1 flex items-center justify-center group hover:scale-105 transition">
+                                    <div class="w-full h-full bg-white rounded-full group-hover:bg-slate-200"></div>
+                                </button>
+                                <p class="text-[10px] text-slate-500">Tap to Secure Evidence</p>
+                            </div>
+                        </div>
+
+                        <!-- Uploading State -->
+                        <div id="cam-uploading" class="hidden absolute inset-0 bg-slate-900 flex flex-col items-center justify-center z-20">
+                            <div class="w-16 h-16 border-4 border-sky-500 border-t-transparent rounded-full animate-spin mb-6"></div>
+                            <h4 class="font-bold text-white">Encrypting...</h4>
+                            <p class="text-xs text-slate-400 mt-2">Uploading to Secure Vault</p>
+                        </div>
+
+                        <!-- Success State -->
+                        <div id="cam-success" class="hidden absolute inset-0 bg-green-600 flex flex-col items-center justify-center z-20 p-8 text-center">
+                            <div class="text-6xl mb-4">🔒</div>
+                            <h3 class="text-2xl font-bold text-white mb-2">SECURED</h3>
+                            <p class="text-sm text-white/80 mb-8">Evidence locked in cloud vault. Accessible only by your safety circle.</p>
+                            <button onclick="resetEvidence()" class="bg-white/20 border border-white text-white px-6 py-2 rounded-full text-xs font-bold hover:bg-white/30 transition">Add More</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- SECTION 3: USE CASES (SCENARIOS - UPDATED) -->
         <section id="use-cases" class="space-y-8">
             <div class="text-center max-w-2xl mx-auto">
@@ -452,9 +452,9 @@
                         <div class="h-10 w-10 bg-sky-100 text-[#4292c6] rounded-lg flex items-center justify-center text-xl mb-4">🛍️</div>
                         <button onclick="toggleScenarios('marketplace')" class="text-xs text-[#4292c6] font-semibold hover:underline focus:outline-none">View Scenarios ▼</button>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Marketplace Mode</h3>
-                    <p class="text-sm text-slate-500 mb-4">For selling items to strangers.</p>
-                    <div class="bg-slate-50 p-3 rounded-lg text-xs mb-4">
+                    <h3 class="font-bold text-lg mb-2 text-slate-900">Marketplace Mode</h3>
+                    <p class="text-sm text-black mb-4">For selling items to strangers.</p>
+                    <div class="bg-slate-50 p-3 rounded-lg text-xs mb-4 text-black">
                         <strong>POC Feature:</strong> "Evidence Locker" uploads a photo of their license plate <em>before</em> you get in the car.
                     </div>
                     
@@ -462,16 +462,16 @@
                     <div id="scenarios-marketplace" class="hidden space-y-3 mt-4 pt-4 border-t border-slate-100 animate-fade-in-active">
                         <div class="text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">Real World Examples</div>
                         <div class="p-2 bg-slate-50 rounded border border-slate-100">
-                            <div class="text-xs font-bold text-slate-700">High-Value Electronics</div>
-                            <p class="text-[10px] text-slate-500 mt-1">Selling a MacBook at home. Verify buyer ID before unlocking the door.</p>
+                            <div class="text-xs font-bold text-black">High-Value Electronics</div>
+                            <p class="text-[10px] text-black mt-1">Selling a MacBook at home. Verify buyer ID before unlocking the door.</p>
                         </div>
                         <div class="p-2 bg-slate-50 rounded border border-slate-100">
-                            <div class="text-xs font-bold text-slate-700">Used Car Test Drive</div>
-                            <p class="text-[10px] text-slate-500 mt-1">Stranger driving your car. GPS tracking ensures adherence to the test route.</p>
+                            <div class="text-xs font-bold text-black">Used Car Test Drive</div>
+                            <p class="text-[10px] text-black mt-1">Stranger driving your car. GPS tracking ensures adherence to the test route.</p>
                         </div>
                         <div class="p-2 bg-slate-50 rounded border border-slate-100">
-                            <div class="text-xs font-bold text-slate-700">Furniture Pickup</div>
-                            <p class="text-[10px] text-slate-500 mt-1">Buyers entering your home to move heavy items. Alert triggers if they stay >15 mins.</p>
+                            <div class="text-xs font-bold text-black">Furniture Pickup</div>
+                            <p class="text-[10px] text-black mt-1">Buyers entering your home to move heavy items. Alert triggers if they stay >15 mins.</p>
                         </div>
                     </div>
                 </div>
@@ -482,9 +482,9 @@
                         <div class="h-10 w-10 bg-teal-100 text-teal-600 rounded-lg flex items-center justify-center text-xl mb-4">🥂</div>
                         <button onclick="toggleScenarios('dating')" class="text-xs text-teal-600 font-semibold hover:underline focus:outline-none">View Scenarios ▼</button>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Dating Mode</h3>
-                    <p class="text-sm text-slate-500 mb-4">For meeting new matches.</p>
-                    <div class="bg-slate-50 p-3 rounded-lg text-xs mb-4">
+                    <h3 class="font-bold text-lg mb-2 text-slate-900">Dating Mode</h3>
+                    <p class="text-sm text-black mb-4">For meeting new matches.</p>
+                    <div class="bg-slate-50 p-3 rounded-lg text-xs mb-4 text-black">
                         <strong>POC Feature:</strong> "Get Out" button triggers a fake incoming call from your "Landlord" for a polite exit.
                     </div>
 
@@ -492,16 +492,16 @@
                     <div id="scenarios-dating" class="hidden space-y-3 mt-4 pt-4 border-t border-slate-100 animate-fade-in-active">
                         <div class="text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">Real World Examples</div>
                         <div class="p-2 bg-slate-50 rounded border border-slate-100">
-                            <div class="text-xs font-bold text-slate-700">The "Bad Vibe" Exit</div>
-                            <p class="text-[10px] text-slate-500 mt-1">Discreetly triggering a fake emergency call to leave a date early without confrontation.</p>
+                            <div class="text-xs font-bold text-black">The "Bad Vibe" Exit</div>
+                            <p class="text-[10px] text-black mt-1">Discreetly triggering a fake emergency call to leave a date early without confrontation.</p>
                         </div>
                         <div class="p-2 bg-slate-50 rounded border border-slate-100">
-                            <div class="text-xs font-bold text-slate-700">Going Private</div>
-                            <p class="text-[10px] text-slate-500 mt-1">Transitioning from a public bar to a private apartment. Logs the new address instantly.</p>
+                            <div class="text-xs font-bold text-black">Going Private</div>
+                            <p class="text-[10px] text-black mt-1">Transitioning from a public bar to a private apartment. Logs the new address instantly.</p>
                         </div>
                         <div class="p-2 bg-slate-50 rounded border border-slate-100">
-                            <div class="text-xs font-bold text-slate-700">Drink Safety</div>
-                            <p class="text-[10px] text-slate-500 mt-1">Setting a short 5-min timer while leaving a drink unattended or going to the restroom.</p>
+                            <div class="text-xs font-bold text-black">Drink Safety</div>
+                            <p class="text-[10px] text-black mt-1">Setting a short 5-min timer while leaving a drink unattended or going to the restroom.</p>
                         </div>
                     </div>
                 </div>
@@ -512,9 +512,9 @@
                         <div class="h-10 w-10 bg-indigo-100 text-indigo-600 rounded-lg flex items-center justify-center text-xl mb-4">🚖</div>
                         <button onclick="toggleScenarios('ride')" class="text-xs text-indigo-600 font-semibold hover:underline focus:outline-none">View Scenarios ▼</button>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Ride Mode</h3>
-                    <p class="text-sm text-slate-500 mb-4">For solo travel & rideshares.</p>
-                    <div class="bg-slate-50 p-3 rounded-lg text-xs mb-4">
+                    <h3 class="font-bold text-lg mb-2 text-slate-900">Ride Mode</h3>
+                    <p class="text-sm text-black mb-4">For solo travel & rideshares.</p>
+                    <div class="bg-slate-50 p-3 rounded-lg text-xs mb-4 text-black">
                         <strong>POC Feature:</strong> Route monitoring alerts you if the driver stops unexpectedly or goes off-course.
                     </div>
 
@@ -522,16 +522,16 @@
                     <div id="scenarios-ride" class="hidden space-y-3 mt-4 pt-4 border-t border-slate-100 animate-fade-in-active">
                         <div class="text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">Real World Examples</div>
                         <div class="p-2 bg-slate-50 rounded border border-slate-100">
-                            <div class="text-xs font-bold text-slate-700">The "Off-Route" Alert</div>
-                            <p class="text-[10px] text-slate-500 mt-1">Driver takes a shortcut through a secluded area or stops unexpectedly.</p>
+                            <div class="text-xs font-bold text-black">The "Off-Route" Alert</div>
+                            <p class="text-[10px] text-black mt-1">Driver takes a shortcut through a secluded area or stops unexpectedly.</p>
                         </div>
                         <div class="p-2 bg-slate-50 rounded border border-slate-100">
-                            <div class="text-xs font-bold text-slate-700">Late Night Solo</div>
-                            <p class="text-[10px] text-slate-500 mt-1">Returning home alone at 2 AM. Aggressive check-ins until you are inside.</p>
+                            <div class="text-xs font-bold text-black">Late Night Solo</div>
+                            <p class="text-[10px] text-black mt-1">Returning home alone at 2 AM. Aggressive check-ins until you are inside.</p>
                         </div>
                         <div class="p-2 bg-slate-50 rounded border border-slate-100">
-                            <div class="text-xs font-bold text-slate-700">Foreign Travel</div>
-                            <p class="text-[10px] text-slate-500 mt-1">Using local taxi apps in a country where you don't speak the language.</p>
+                            <div class="text-xs font-bold text-black">Foreign Travel</div>
+                            <p class="text-[10px] text-black mt-1">Using local taxi apps in a country where you don't speak the language.</p>
                         </div>
                     </div>
                 </div>
@@ -1205,12 +1205,48 @@
             const alertBox = document.getElementById('ride-alert');
             const status = document.getElementById('ride-status');
             
-            alertBox.classList.add('translate-y-full');
-            status.innerHTML = '<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Monitoring Route';
+            if(alertBox) alertBox.classList.add('translate-y-full');
+            if(status) status.innerHTML = '<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Monitoring Route';
             
-            car.style.transition = 'all 1s ease';
-            car.style.left = '45px';
-            car.style.top = '290px';
+            if(car) {
+                car.style.transition = 'all 1s ease';
+                car.style.left = '45px';
+                car.style.top = '290px';
+            }
+        }
+
+        // --- EVIDENCE LOCKER LOGIC ---
+        window.captureEvidence = function() {
+            const flash = document.getElementById('cam-flash');
+            const viewfinder = document.getElementById('cam-viewfinder');
+            const uploading = document.getElementById('cam-uploading');
+            const success = document.getElementById('cam-success');
+
+            // 1. Flash
+            if(flash) {
+                flash.style.opacity = '1';
+                setTimeout(() => { flash.style.opacity = '0'; }, 100);
+            }
+
+            // 2. Show Uploading
+            setTimeout(() => {
+                if(viewfinder) viewfinder.classList.add('hidden');
+                if(uploading) uploading.classList.remove('hidden');
+            }, 300);
+
+            // 3. Show Success
+            setTimeout(() => {
+                if(uploading) uploading.classList.add('hidden');
+                if(success) success.classList.remove('hidden');
+            }, 2500);
+        }
+
+        window.resetEvidence = function() {
+            const viewfinder = document.getElementById('cam-viewfinder');
+            const success = document.getElementById('cam-success');
+            
+            if(success) success.classList.add('hidden');
+            if(viewfinder) viewfinder.classList.remove('hidden');
         }
 
         // --- TECH DEMO LOGIC ---
