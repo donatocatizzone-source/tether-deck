@@ -297,8 +297,8 @@
             </div>
         </section>
 
-        <!-- SECTION 2.5: FEATURE SPOTLIGHT (NEW SECTION) -->
-        <section id="feature-spotlight" class="bg-slate-900 text-white rounded-3xl p-8 lg:p-12 overflow-hidden relative">
+        <!-- SECTION 2.5: FEATURE SPOTLIGHT (DATING) -->
+        <section id="feature-spotlight" class="bg-slate-900 text-white rounded-3xl p-8 lg:p-12 overflow-hidden relative mb-24">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div class="z-10">
                     <div class="inline-block px-3 py-1 bg-[#4292c6] text-white text-xs font-bold uppercase tracking-wide rounded-full mb-4">
@@ -365,6 +365,72 @@
                                 </div>
                                 <button onclick="resetFakeCall()" class="w-16 h-16 rounded-full bg-red-500 flex items-center justify-center text-2xl hover:bg-red-600 transition">📞</button>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2.6: RIDE MODE DEMO (NEW SECTION) -->
+        <section id="ride-demo" class="bg-slate-50 rounded-3xl shadow-sm border border-slate-200 p-8 lg:p-12 overflow-hidden mb-24">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Text / Explanation -->
+                <div class="order-2 lg:order-1">
+                    <div class="inline-block px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-bold uppercase tracking-wide rounded-full mb-4">
+                        Ride Mode Exclusive
+                    </div>
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4">Intelligent Route Monitor</h2>
+                    <p class="text-slate-600 mb-8 leading-relaxed">
+                        Even without API access, Tether protects your ride. By analyzing your GPS speed and trajectory against the expected route, we detect anomalies instantly.
+                        <br><br>
+                        <strong>Simulate a route deviation below</strong> to see how Tether reacts when a driver goes off-course.
+                    </p>
+                    
+                    <div class="flex gap-4">
+                        <button onclick="startRideSim('safe')" class="bg-white border border-slate-300 text-slate-700 px-6 py-3 rounded-lg font-bold hover:bg-slate-100 transition shadow-sm flex items-center gap-2">
+                            <span>✅</span> Safe Trip
+                        </button>
+                        <button onclick="startRideSim('deviate')" class="bg-white border border-red-200 text-red-600 px-6 py-3 rounded-lg font-bold hover:bg-red-50 transition shadow-sm flex items-center gap-2">
+                            <span>⚠️</span> Simulate Deviation
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Visual Demo -->
+                <div class="order-1 lg:order-2 flex justify-center relative">
+                    <!-- Map Container -->
+                    <div class="w-full max-w-md bg-slate-200 rounded-2xl overflow-hidden shadow-lg border border-slate-300 relative h-[350px]">
+                        <!-- Simple Map Background -->
+                        <svg class="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+                                </pattern>
+                            </defs>
+                            <rect width="100%" height="100%" fill="url(#grid)" />
+                            <!-- Roads -->
+                            <path d="M 50 300 L 150 200 L 250 50" stroke="white" stroke-width="12" fill="none" stroke-linecap="round" />
+                            <path d="M 50 300 L 150 200 L 250 50" id="main-route" stroke="#94a3b8" stroke-width="8" fill="none" stroke-linecap="round" />
+                            <!-- Destination -->
+                            <circle cx="250" cy="50" r="6" fill="#ef4444" />
+                        </svg>
+                        
+                        <!-- The Car -->
+                        <div id="sim-car" class="absolute w-6 h-6 bg-indigo-600 rounded-full border-2 border-white shadow-md z-10 transition-all duration-[2000ms] ease-linear" style="left: 45px; top: 290px;"></div>
+
+                        <!-- Status Overlay -->
+                        <div class="absolute top-4 left-4 right-4 flex justify-between items-start">
+                            <div id="ride-status" class="bg-white/90 backdrop-blur px-3 py-2 rounded-lg shadow-sm border border-slate-200 text-xs font-bold text-slate-600 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Monitoring Route
+                            </div>
+                        </div>
+
+                        <!-- Alert Overlay (Hidden by default) -->
+                        <div id="ride-alert" class="absolute inset-x-4 bottom-4 bg-red-600 text-white p-4 rounded-xl shadow-xl transform translate-y-full transition-transform duration-300 flex flex-col items-center text-center">
+                            <div class="text-2xl mb-1">⚠️</div>
+                            <h4 class="font-bold">Route Deviation Detected</h4>
+                            <p class="text-[10px] text-white/80 mb-3">You are 0.5 miles off course.</p>
+                            <button onclick="resetRideSim()" class="bg-white text-red-600 px-4 py-1.5 rounded-full text-xs font-bold">I'm Safe</button>
                         </div>
                     </div>
                 </div>
@@ -936,9 +1002,7 @@
             }
         }
 
-        // --- PHONE SIMULATOR LOGIC ---
-        const phoneContent = document.getElementById('phone-content');
-        
+        // --- SIMULATOR STATE ---
         const simStages = {
             setup: `
                 <div class="p-6 h-full flex flex-col fade-enter-active">
@@ -1001,16 +1065,22 @@
             `
         };
 
-        function setSimStage(stage) {
+        // Function definition hoisted, but we'll attach to window to be safe for HTML onclicks
+        window.setSimStage = function(stage) {
+            const phoneContent = document.getElementById('phone-content');
+            if (!phoneContent) return;
+            
             phoneContent.innerHTML = simStages[stage];
             
             // Update UI highlights (Simulator Steps)
             ['step-1', 'step-2', 'step-3'].forEach(id => {
                 const el = document.getElementById(id);
-                el.classList.add('opacity-60', 'border-transparent');
-                el.classList.remove('bg-sky-50', 'border-sky-100', 'opacity-100');
-                el.querySelector('div').classList.remove('bg-brand', 'text-white');
-                el.querySelector('div').classList.add('bg-slate-200', 'text-slate-600');
+                if (el) {
+                    el.classList.add('opacity-60', 'border-transparent');
+                    el.classList.remove('bg-sky-50', 'border-sky-100', 'opacity-100');
+                    el.querySelector('div').classList.remove('bg-brand', 'text-white');
+                    el.querySelector('div').classList.add('bg-slate-200', 'text-slate-600');
+                }
             });
 
             // Highlight current step
@@ -1021,18 +1091,130 @@
 
             if (activeId) {
                 const el = document.getElementById(activeId);
-                el.classList.remove('opacity-60', 'border-transparent');
-                el.classList.add('bg-sky-50', 'border-sky-100', 'opacity-100');
-                el.querySelector('div').classList.remove('bg-slate-200', 'text-slate-600');
-                el.querySelector('div').classList.add('bg-brand', 'text-white');
+                if (el) {
+                    el.classList.remove('opacity-60', 'border-transparent');
+                    el.classList.add('bg-sky-50', 'border-sky-100', 'opacity-100');
+                    el.querySelector('div').classList.remove('bg-slate-200', 'text-slate-600');
+                    el.querySelector('div').classList.add('bg-brand', 'text-white');
+                }
+            }
+        };
+
+        // --- FAKE CALL LOGIC ---
+        let callDurationInterval;
+        
+        window.triggerFakeCall = function() {
+            const btn = document.querySelector('#fc-screen-idle button');
+            const status = document.querySelector('#fc-screen-idle p');
+            
+            btn.innerHTML = `<span class="text-2xl animate-pulse">⏳</span><span class="text-[10px] font-bold uppercase">Sending...</span>`;
+            status.textContent = "Simulating discretion delay (3s)...";
+            
+            // 3 Second Delay
+            setTimeout(() => {
+                document.getElementById('fc-screen-idle').classList.add('hidden');
+                document.getElementById('fc-screen-incoming').classList.remove('hidden');
+                document.getElementById('fake-call-ui').classList.add('ringing'); // Add Vibrate
+            }, 3000);
+        }
+
+        window.acceptFakeCall = function() {
+            document.getElementById('fake-call-ui').classList.remove('ringing');
+            document.getElementById('fc-screen-incoming').classList.add('hidden');
+            document.getElementById('fc-screen-active').classList.remove('hidden');
+            
+            let seconds = 0;
+            const timerDisplay = document.getElementById('call-timer');
+            callDurationInterval = setInterval(() => {
+                seconds++;
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                timerDisplay.textContent = `${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
+            }, 1000);
+        }
+
+        window.resetFakeCall = function() {
+            clearInterval(callDurationInterval);
+            document.getElementById('fc-screen-active').classList.add('hidden');
+            document.getElementById('fc-screen-incoming').classList.add('hidden');
+            document.getElementById('fc-screen-idle').classList.remove('hidden');
+            document.getElementById('fake-call-ui').classList.remove('ringing');
+            
+            // Reset Button State
+            const btn = document.querySelector('#fc-screen-idle button');
+            const status = document.querySelector('#fc-screen-idle p');
+            btn.innerHTML = `<span class="text-2xl mb-1">📞</span><span class="text-[10px] font-bold uppercase">Trigger Call</span>`;
+            status.textContent = "Tap to schedule a call in 5s";
+            document.getElementById('call-timer').textContent = "00:00";
+        }
+
+        // --- RIDE MODE SIM LOGIC ---
+        window.startRideSim = function(mode) {
+            const car = document.getElementById('sim-car');
+            const status = document.getElementById('ride-status');
+            const alertBox = document.getElementById('ride-alert');
+            
+            // Reset
+            car.style.transition = 'none';
+            car.style.left = '45px';
+            car.style.top = '290px';
+            alertBox.classList.add('translate-y-full'); // Hide alert
+            status.innerHTML = '<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Monitoring Route';
+            
+            // Force reflow
+            void car.offsetWidth;
+            
+            car.style.transition = 'all 2s linear';
+            
+            if (mode === 'safe') {
+                // Move along path
+                // Point 1
+                car.style.left = '145px';
+                car.style.top = '190px';
+                
+                setTimeout(() => {
+                    // Point 2
+                    car.style.left = '245px';
+                    car.style.top = '45px';
+                    setTimeout(() => {
+                        status.innerHTML = '<span class="w-2 h-2 rounded-full bg-blue-500"></span> Arrived Safely';
+                    }, 2000);
+                }, 2000);
+            } else {
+                // Deviate
+                // Point 1 (Normal)
+                car.style.left = '145px';
+                car.style.top = '190px';
+                
+                setTimeout(() => {
+                    // Veer Off (Point 2 Deviated)
+                    car.style.left = '280px';
+                    car.style.top = '190px'; // Go straight right instead of up-right
+                    
+                    // Trigger Alert
+                    setTimeout(() => {
+                        alertBox.classList.remove('translate-y-full');
+                        status.innerHTML = '<span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> Alert Active';
+                    }, 1000);
+                }, 2000);
             }
         }
 
-        // Initialize Simulator
-        setSimStage('setup');
+        window.resetRideSim = function() {
+            const car = document.getElementById('sim-car');
+            const alertBox = document.getElementById('ride-alert');
+            const status = document.getElementById('ride-status');
+            
+            alertBox.classList.add('translate-y-full');
+            status.innerHTML = '<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Monitoring Route';
+            
+            car.style.transition = 'all 1s ease';
+            car.style.left = '45px';
+            car.style.top = '290px';
+        }
 
         // --- TECH DEMO LOGIC ---
-        async function runTechDemo(type) {
+        window.runTechDemo = async function(type) {
             const terminal = document.getElementById('terminal-output');
             terminal.innerHTML = '<div class="code-line">> Initializing extraction...</div>';
             
@@ -1091,8 +1273,9 @@
             { name: "Realtor.com", type: "gig", method: "🔗 Link Parse" }
         ];
 
-        function filterEcosystem(filter) {
+        window.filterEcosystem = function(filter) {
             const grid = document.getElementById('ecosystem-grid');
+            if(!grid) return;
             grid.innerHTML = ''; // Clear existing
 
             // Update Buttons
@@ -1123,94 +1306,50 @@
             });
         }
 
-        // Initialize Ecosystem
-        filterEcosystem('all');
+        // --- INIT ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize main simulator
+            setSimStage('setup');
+            
+            // Initialize ecosystem
+            filterEcosystem('all');
 
+            // --- CHARTS ---
+            Chart.defaults.font.family = "'Inter', sans-serif";
+            Chart.defaults.color = '#64748b'; // Slate-500
 
-        // --- CHARTS ---
-        Chart.defaults.font.family = "'Inter', sans-serif";
-        Chart.defaults.color = '#64748b'; // Slate-500
-
-        // Churn / Market Doughnut
-        new Chart(document.getElementById('churnChart'), {
-            type: 'doughnut',
-            data: {
-                labels: ['Occasional Users (85%)', 'Power Users (15%)'],
-                datasets: [{
-                    data: [85, 15],
-                    backgroundColor: ['#4292c6', '#e2e8f0'], // Brand Blue, Slate-200
-                    borderWidth: 0,
-                    hoverOffset: 4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 8 } },
-                    datalabels: {
-                        color: '#fff',
-                        font: { weight: 'bold' },
-                        formatter: (value, ctx) => {
-                            let label = ctx.chart.data.labels[ctx.dataIndex];
-                            if(label.includes('Power')) return '15%';
-                            return '85%';
-                        }
-                    }
+            // Churn / Market Doughnut
+            new Chart(document.getElementById('churnChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Occasional Users (85%)', 'Power Users (15%)'],
+                    datasets: [{
+                        data: [85, 15],
+                        backgroundColor: ['#4292c6', '#e2e8f0'], // Brand Blue, Slate-200
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
                 },
-                cutout: '60%'
-            },
-            plugins: [ChartDataLabels]
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 8 } },
+                        datalabels: {
+                            color: '#fff',
+                            font: { weight: 'bold' },
+                            formatter: (value, ctx) => {
+                                let label = ctx.chart.data.labels[ctx.dataIndex];
+                                if(label.includes('Power')) return '15%';
+                                return '85%';
+                            }
+                        }
+                    },
+                    cutout: '60%'
+                },
+                plugins: [ChartDataLabels]
+            });
         });
-
-        // --- FAKE CALL LOGIC ---
-        let fakeCallTimer;
-        let callDurationInterval;
-        
-        function triggerFakeCall() {
-            const btn = document.querySelector('#fc-screen-idle button');
-            const status = document.querySelector('#fc-screen-idle p');
-            
-            btn.innerHTML = `<span class="text-2xl animate-pulse">⏳</span><span class="text-[10px] font-bold uppercase">Sending...</span>`;
-            status.textContent = "Simulating discretion delay (3s)...";
-            
-            // 3 Second Delay
-            setTimeout(() => {
-                document.getElementById('fc-screen-idle').classList.add('hidden');
-                document.getElementById('fc-screen-incoming').classList.remove('hidden');
-                document.getElementById('fake-call-ui').classList.add('ringing'); // Add Vibrate
-            }, 3000);
-        }
-
-        function acceptFakeCall() {
-            document.getElementById('fake-call-ui').classList.remove('ringing');
-            document.getElementById('fc-screen-incoming').classList.add('hidden');
-            document.getElementById('fc-screen-active').classList.remove('hidden');
-            
-            let seconds = 0;
-            const timerDisplay = document.getElementById('call-timer');
-            callDurationInterval = setInterval(() => {
-                seconds++;
-                const mins = Math.floor(seconds / 60);
-                const secs = seconds % 60;
-                timerDisplay.textContent = `${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
-            }, 1000);
-        }
-
-        function resetFakeCall() {
-            clearInterval(callDurationInterval);
-            document.getElementById('fc-screen-active').classList.add('hidden');
-            document.getElementById('fc-screen-incoming').classList.add('hidden');
-            document.getElementById('fc-screen-idle').classList.remove('hidden');
-            document.getElementById('fake-call-ui').classList.remove('ringing');
-            
-            // Reset Button State
-            const btn = document.querySelector('#fc-screen-idle button');
-            const status = document.querySelector('#fc-screen-idle p');
-            btn.innerHTML = `<span class="text-2xl mb-1">📞</span><span class="text-[10px] font-bold uppercase">Trigger Call</span>`;
-            status.textContent = "Tap to schedule a call in 5s";
-            document.getElementById('call-timer').textContent = "00:00";
-        }
     </script>
 </body>
 </html>
