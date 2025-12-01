@@ -771,35 +771,110 @@
         </section>
 
         <!-- SECTION 8: PRICING & BUSINESS MODEL -->
-        <section id="pricing" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <!-- Chart: The Churn Problem -->
-            <div class="lg:col-span-2 bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-                <div class="mb-6">
-                    <h3 class="text-2xl font-bold text-slate-900 mb-2">Sustainable Business Model</h3>
-                    <p class="text-sm text-slate-600">
-                        Safety apps traditionally fail due to high churn: users leave when they aren't actively dating or selling. Tether's hybrid model captures the entire market.
-                    </p>
-                </div>
+        <section id="pricing" class="space-y-12">
+            
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <h2 class="text-3xl font-bold text-slate-900">Plans & Pricing</h2>
+                <p class="mt-4 text-slate-600">
+                    Flexible protection for everyone. Choose a per-mission model for occasional use or a subscription for daily peace of mind.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                    <div class="chart-container">
-                        <canvas id="churnChart"></canvas>
+                <!-- Free Tier -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 flex flex-col">
+                    <div class="mb-4">
+                        <span class="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold uppercase">Basic</span>
+                        <h3 class="text-2xl font-bold mt-2 text-slate-900">Free</h3>
+                        <p class="text-slate-500 text-sm">For essential safety.</p>
                     </div>
-                    <div class="space-y-4">
-                        <div class="p-4 bg-sky-50 rounded-xl border border-sky-100">
-                            <h4 class="font-bold text-[#4292c6] text-lg">Pay-Per-Mission ($0.99)</h4>
-                            <p class="text-xs text-sky-800 mt-1">Captures the 85% "Occasional User". An impulse buy at the moment of anxiety. High margin, low barrier.</p>
+                    <div class="text-4xl font-black text-slate-900 mb-6">$0</div>
+                    <ul class="space-y-3 text-sm text-slate-600 flex-1">
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Dead Man's Switch Timer</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> SMS Alerts to Contacts</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Local Evidence Storage</li>
+                    </ul>
+                    <button class="w-full mt-8 border border-slate-300 text-slate-700 font-bold py-3 rounded-xl hover:bg-slate-50 transition">Get Started</button>
+                </div>
+
+                <!-- Premium Tier (Highlighted) -->
+                <div class="bg-slate-900 text-white p-8 rounded-3xl shadow-xl border border-slate-800 relative flex flex-col transform lg:scale-105 z-10">
+                    <div class="absolute top-0 right-0 bg-[#4292c6] text-white text-xs font-bold px-3 py-1 rounded-bl-xl rounded-tr-2xl">MOST POPULAR</div>
+                    <div class="mb-4">
+                        <span class="bg-indigo-500/20 text-indigo-300 px-3 py-1 rounded-full text-xs font-bold uppercase border border-indigo-500/30">Premium</span>
+                        <h3 class="text-2xl font-bold mt-2">The Bodyguard</h3>
+                        <p class="text-slate-400 text-sm">Full protection suite.</p>
+                    </div>
+                    <div class="mb-6">
+                        <span class="text-4xl font-black">$9.99</span><span class="text-slate-400 text-sm">/mo</span>
+                        <div class="text-xs text-slate-400 mt-1">or $0.99 per single mission</div>
+                    </div>
+                    <ul class="space-y-3 text-sm text-slate-300 flex-1">
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> <strong>Live 911 Dispatch API</strong></li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Cloud Evidence Vault</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> "Get Out" Fake Call</li>
+                        <li class="flex items-center gap-2 p-2 bg-white/10 rounded-lg border border-white/10">
+                            <span class="w-4 h-4 bg-green-500 rounded-full flex items-center justify-center text-black text-[10px] font-bold">✓</span>
+                            <span class="font-bold text-white">"Vouched by Tether" Badge</span>
+                        </li>
+                    </ul>
+                    <button class="w-full mt-8 bg-[#4292c6] text-white font-bold py-3 rounded-xl hover:bg-[#367da8] transition shadow-lg shadow-blue-900/50">Start Free Trial</button>
+                </div>
+
+                <!-- B2B Tier -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 flex flex-col">
+                    <div class="mb-4">
+                        <span class="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold uppercase">Enterprise</span>
+                        <h3 class="text-2xl font-bold mt-2 text-slate-900">Guardian</h3>
+                        <p class="text-slate-500 text-sm">For parents & employers.</p>
+                    </div>
+                    <div class="text-4xl font-black text-slate-900 mb-6">Custom</div>
+                    <ul class="space-y-3 text-sm text-slate-600 flex-1">
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Real-time Dashboard</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Multi-User Management</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Employee Safety Compliance</li>
+                    </ul>
+                    <button class="w-full mt-8 border border-slate-300 text-slate-700 font-bold py-3 rounded-xl hover:bg-slate-50 transition">Contact Sales</button>
+                </div>
+
+            </div>
+
+            <!-- LIVE 911 DEMO (NEW) -->
+            <div id="dispatch-demo" class="mt-16 bg-slate-50 rounded-3xl border border-slate-200 p-8 lg:p-12 overflow-hidden relative">
+                <div class="max-w-4xl mx-auto">
+                    <div class="text-center mb-8">
+                        <div class="inline-block px-3 py-1 bg-red-100 text-red-700 text-xs font-bold uppercase tracking-wide rounded-full mb-4">
+                            Premium Feature
                         </div>
-                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
-                            <h4 class="font-bold text-slate-800 text-lg">Gig Subscription ($9.99/mo)</h4>
-                            <p class="text-xs text-slate-600 mt-1">For Realtors, Drivers, and Power Sellers. Includes automated tax receipts & unlimited missions.</p>
+                        <h3 class="text-2xl font-bold text-slate-900">Live 911 Integration Demo</h3>
+                        <p class="text-slate-600 mt-2 text-sm">See what happens when a Grade 4 Emergency is triggered.</p>
+                    </div>
+
+                    <div class="bg-black rounded-2xl shadow-2xl overflow-hidden border border-slate-800 max-w-lg mx-auto font-mono text-xs md:text-sm">
+                        <div class="bg-slate-900 p-3 border-b border-slate-800 flex justify-between items-center">
+                            <span class="text-slate-400">System Log: Active Session</span>
+                            <div class="flex gap-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+                        </div>
+                        <div id="dispatch-log" class="p-6 h-64 overflow-y-auto space-y-2 text-green-400">
+                            <div class="opacity-50">> System Ready.</div>
+                            <div class="opacity-50">> Monitoring user location...</div>
+                        </div>
+                        <div class="p-4 border-t border-slate-800 bg-slate-900 flex justify-center">
+                            <button onclick="simulateDispatch()" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-bold transition flex items-center gap-2 shadow-lg shadow-red-900/50">
+                                <span>🚨</span> TRIGGER SOS
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Future Pivot / Guardian Model -->
-            <div class="bg-slate-900 text-white p-8 rounded-2xl shadow-xl flex flex-col justify-between">
+            <div class="bg-slate-900 text-white p-8 rounded-2xl shadow-xl flex flex-col justify-between mt-12">
                 <div>
                     <div class="text-[#4292c6] font-bold tracking-wider text-xs mb-2">FUTURE GROWTH</div>
                     <h3 class="text-2xl font-bold mb-4">The "Guardian" Model</h3>
@@ -1318,6 +1393,33 @@
             
             if(success) success.classList.add('hidden');
             if(viewfinder) viewfinder.classList.remove('hidden');
+        }
+
+        // --- 911 DISPATCH DEMO LOGIC ---
+        window.simulateDispatch = async function() {
+            const log = document.getElementById('dispatch-log');
+            log.innerHTML = ''; // Clear
+            
+            const messages = [
+                { text: "> SOS TRIGGERED. INITIATING PROTOCOL...", delay: 0, color: "text-red-500 font-bold" },
+                { text: "> Encrypting Evidence Package...", delay: 400, color: "text-green-400" },
+                { text: "> Uploading to Secure Vault (2MB)... 100%", delay: 1200, color: "text-green-400" },
+                { text: "> Connecting to Noonlight Dispatch API...", delay: 1800, color: "text-yellow-400" },
+                { text: "> CONNECTION ESTABLISHED [ID: #99281]", delay: 2600, color: "text-green-400 font-bold" },
+                { text: "> Transmitting GPS: 33.1234, -96.5678", delay: 3000, color: "text-blue-400" },
+                { text: "> Transmitting User Profile: Gabe (30)", delay: 3400, color: "text-blue-400" },
+                { text: "> DISPATCHER 'SARAH' JOINED SESSION", delay: 4200, color: "text-white bg-blue-600 px-1" },
+                { text: "Sarah: 'This is 911 Dispatch. We have your location. Police are en route.'", delay: 5000, color: "text-white italic" }
+            ];
+
+            for (let msg of messages) {
+                await new Promise(r => setTimeout(r, msg.delay - (messages[messages.indexOf(msg)-1]?.delay || 0)));
+                const div = document.createElement('div');
+                div.className = msg.color;
+                div.innerText = msg.text;
+                log.appendChild(div);
+                log.scrollTop = log.scrollHeight;
+            }
         }
 
         // --- TECH DEMO LOGIC ---
