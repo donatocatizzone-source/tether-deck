@@ -221,6 +221,9 @@
                         <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 text-center w-32 opacity-50">
                             <span class="block text-xs font-bold">Marketplace</span>
                         </div>
+                        <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 text-center w-32 opacity-50">
+                            <span class="block text-xs font-bold">Student Safety</span>
+                        </div>
                     </div>
 
                     <!-- The Gap Visual -->
@@ -868,7 +871,7 @@
                 <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center">
                     <div class="text-4xl font-black text-slate-900 mb-2">$12.4B</div>
                     <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-4">Safety Tech Market by 2030</div>
-                    <p class="text-sm text-slate-600">One of the fastest-growing sectors in consumer tech.</p>
+                    <p class="text-sm text-slate-600">Personal safety devices and apps are one of the fastest-growing sectors in consumer tech.</p>
                 </div>
                 <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center relative overflow-hidden">
                     <div class="text-4xl font-black text-[#4292c6] mb-2">491M</div>
@@ -1617,6 +1620,33 @@
             avatar.style.top = '35px';
             avatar.innerHTML = "🎒";
             avatar.classList.remove('animate-bounce');
+        }
+
+        // --- 911 DISPATCH DEMO LOGIC ---
+        window.simulateDispatch = async function() {
+            const log = document.getElementById('dispatch-log');
+            log.innerHTML = ''; // Clear
+            
+            const messages = [
+                { text: "> SOS TRIGGERED. INITIATING PROTOCOL...", delay: 0, color: "text-red-500 font-bold" },
+                { text: "> Encrypting Evidence Package...", delay: 400, color: "text-green-400" },
+                { text: "> Uploading to Secure Vault (2MB)... 100%", delay: 1200, color: "text-green-400" },
+                { text: "> Connecting to Noonlight Dispatch API...", delay: 1800, color: "text-yellow-400" },
+                { text: "> CONNECTION ESTABLISHED [ID: #99281]", delay: 2600, color: "text-green-400 font-bold" },
+                { text: "> Transmitting GPS: 33.1234, -96.5678", delay: 3000, color: "text-blue-400" },
+                { text: "> Transmitting User Profile: Gabe (30)", delay: 3400, color: "text-blue-400" },
+                { text: "> DISPATCHER 'SARAH' JOINED SESSION", delay: 4200, color: "text-white bg-blue-600 px-1" },
+                { text: "Sarah: 'This is 911 Dispatch. We have your location. Police are en route.'", delay: 5000, color: "text-white italic" }
+            ];
+
+            for (let msg of messages) {
+                await new Promise(r => setTimeout(r, msg.delay - (messages[messages.indexOf(msg)-1]?.delay || 0)));
+                const div = document.createElement('div');
+                div.className = msg.color;
+                div.innerText = msg.text;
+                log.appendChild(div);
+                log.scrollTop = log.scrollHeight;
+            }
         }
 
         // --- TECH DEMO LOGIC ---
