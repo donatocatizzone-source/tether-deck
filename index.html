@@ -508,41 +508,127 @@
             </div>
         </section>
 
+        <!-- SECTION 2.8: STUDENT MODE DEMO (NEW SECTION) -->
+        <section id="student-demo" class="bg-emerald-50 rounded-3xl shadow-sm border border-emerald-100 p-8 lg:p-12 overflow-hidden mb-24">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Text / Explanation -->
+                <div class="order-2 lg:order-1">
+                    <div class="inline-block px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wide rounded-full mb-4">
+                        Student Mode Exclusive
+                    </div>
+                    <h2 class="text-3xl font-bold text-slate-900 mb-4">Safe Passage & Light Alerts</h2>
+                    <p class="text-slate-600 mb-6 leading-relaxed">
+                        Teens value autonomy; parents value safety. Tether bridges the gap with <strong>Event-Based Monitoring</strong>.
+                    </p>
+                    <p class="text-slate-600 mb-8 leading-relaxed">
+                        We don't track them 24/7. We only send a "Light GPS Alert" if a specific safety timer expires or if they trigger it manually.
+                    </p>
+                    
+                    <div class="space-y-3">
+                        <div class="flex gap-4">
+                            <button onclick="startStudentSim('timer')" class="flex-1 bg-white border border-emerald-200 text-emerald-700 px-4 py-3 rounded-lg font-bold hover:bg-emerald-100 transition shadow-sm text-sm flex items-center justify-center gap-2">
+                                <span>⏱️</span> Simulate Walk Home
+                            </button>
+                            <button onclick="startStudentSim('sos')" class="flex-1 bg-white border border-red-200 text-red-600 px-4 py-3 rounded-lg font-bold hover:bg-red-50 transition shadow-sm text-sm flex items-center justify-center gap-2">
+                                <span>🆘</span> Manual SOS
+                            </button>
+                        </div>
+                        <p class="text-[10px] text-slate-400 text-center">Click "Simulate Walk" to see the timer expire, or "SOS" for instant alert.</p>
+                    </div>
+                </div>
+
+                <!-- Visual Demo -->
+                <div class="order-1 lg:order-2 flex justify-center relative">
+                    <!-- Map Container -->
+                    <div class="w-full max-w-md bg-white rounded-2xl overflow-hidden shadow-xl border border-slate-200 relative h-[400px]">
+                        <!-- Map SVG -->
+                        <svg class="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <pattern id="grid-student" width="20" height="20" patternUnits="userSpaceOnUse">
+                                    <circle cx="1" cy="1" r="1" fill="#e2e8f0" />
+                                </pattern>
+                            </defs>
+                            <rect width="100%" height="100%" fill="#f8fafc" />
+                            <rect width="100%" height="100%" fill="url(#grid-student)" />
+                            
+                            <!-- Zones -->
+                            <circle cx="50" cy="50" r="30" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" opacity="0.5" /> <!-- School -->
+                            <text x="50" y="50" font-size="10" text-anchor="middle" fill="#1e3a8a" dy=".3em">SCHOOL</text>
+                            
+                            <circle cx="250" cy="350" r="40" fill="#dcfce7" stroke="#22c55e" stroke-width="2" opacity="0.5" /> <!-- Home -->
+                            <text x="250" y="350" font-size="10" text-anchor="middle" fill="#14532d" dy=".3em">HOME</text>
+
+                            <!-- Path -->
+                            <path d="M 50 80 Q 100 200 250 310" stroke="#cbd5e1" stroke-width="4" fill="none" stroke-dasharray="5,5" />
+                        </svg>
+
+                        <!-- Student Avatar -->
+                        <div id="student-avatar" class="absolute w-8 h-8 bg-emerald-500 text-white rounded-full border-2 border-white shadow-md z-10 flex items-center justify-center text-xs transition-all duration-[3000ms] ease-linear" style="left: 35px; top: 35px;">
+                            🎒
+                        </div>
+
+                        <!-- Timer Overlay -->
+                        <div id="student-timer-ui" class="hidden absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-2 rounded-lg shadow-sm border border-slate-200 text-xs font-bold text-slate-600 flex flex-col items-end">
+                            <span class="text-[10px] text-slate-400 uppercase">Walk Home</span>
+                            <span id="student-countdown" class="text-emerald-600 text-lg font-mono">15:00</span>
+                        </div>
+
+                        <!-- Parent Alert Overlay (Hidden) -->
+                        <div id="parent-alert" class="absolute inset-x-4 top-1/2 -translate-y-1/2 bg-white rounded-xl shadow-2xl border border-slate-200 p-4 transform scale-90 opacity-0 transition-all duration-300 pointer-events-none">
+                            <div class="flex items-start gap-3">
+                                <div class="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center text-xl">💬</div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-slate-900">Message from Tether</h4>
+                                    <p class="text-xs text-slate-500 mt-1" id="parent-alert-msg">Alert: Alex missed check-in.</p>
+                                    <div class="mt-2 bg-slate-50 p-2 rounded border border-slate-100 flex items-center gap-2">
+                                        <span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                                        <span class="text-[10px] font-mono text-slate-600">Live GPS: 33.12, -96.44</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Reset Button -->
+                        <button onclick="resetStudentSim()" id="student-reset" class="hidden absolute bottom-4 left-1/2 -translate-x-1/2 bg-white border border-slate-300 text-slate-600 px-4 py-1 rounded-full text-xs shadow-sm hover:bg-slate-50">
+                            Reset Demo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- SECTION 3: USE CASES (SCENARIOS - UPDATED) -->
         <section id="use-cases" class="space-y-8">
             <div class="text-center max-w-2xl mx-auto">
-                <h2 class="text-3xl font-bold text-slate-900">One App, Three Modes</h2>
+                <h2 class="text-3xl font-bold text-slate-900">One App, Four Modes</h2>
                 <p class="mt-4 text-slate-600">We're testing specific features for different types of anxiety. Expand below to see how it works in real life.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Updated Grid to 4 Columns -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 
                 <!-- Marketplace Mode -->
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-brand transition-all duration-300" id="card-marketplace">
                     <div class="flex justify-between items-start">
                         <div class="h-10 w-10 bg-sky-100 text-[#4292c6] rounded-lg flex items-center justify-center text-xl mb-4">🛍️</div>
-                        <button onclick="toggleScenarios('marketplace')" class="text-xs text-[#4292c6] font-semibold hover:underline focus:outline-none">View Scenarios ▼</button>
+                        <button onclick="toggleScenarios('marketplace')" class="text-xs text-[#4292c6] font-semibold hover:underline focus:outline-none">View ▼</button>
                     </div>
-                    <h3 class="font-bold text-lg mb-2 text-slate-900">Marketplace Mode</h3>
+                    <h3 class="font-bold text-lg mb-2 text-slate-900">Marketplace</h3>
                     <p class="text-sm text-black mb-4">For selling items to strangers.</p>
                     <div class="bg-slate-50 p-3 rounded-lg text-xs mb-4 text-black">
-                        <strong>POC Feature:</strong> "Evidence Locker" uploads a photo of their license plate <em>before</em> you get in the car.
+                        <strong>POC Feature:</strong> "Evidence Locker" uploads photo of license plate <em>before</em> meetup.
                     </div>
                     
                     <!-- Expanded Scenarios -->
                     <div id="scenarios-marketplace" class="hidden space-y-3 mt-4 pt-4 border-t border-slate-100 animate-fade-in-active">
-                        <div class="text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">Real World Examples</div>
                         <div class="p-2 bg-slate-50 rounded border border-slate-100">
                             <div class="text-xs font-bold text-black">High-Value Electronics</div>
-                            <p class="text-[10px] text-black mt-1">Selling a MacBook at home. Verify buyer ID before unlocking the door.</p>
+                            <p class="text-[10px] text-black mt-1">Selling a MacBook at home. Verify buyer ID before unlocking door.</p>
                         </div>
                         <div class="p-2 bg-slate-50 rounded border border-slate-100">
                             <div class="text-xs font-bold text-black">Used Car Test Drive</div>
-                            <p class="text-[10px] text-black mt-1">Stranger driving your car. GPS tracking ensures adherence to the test route.</p>
-                        </div>
-                        <div class="p-2 bg-slate-50 rounded border border-slate-100">
-                            <div class="text-xs font-bold text-black">Furniture Pickup</div>
-                            <p class="text-[10px] text-black mt-1">Buyers entering your home to move heavy items. Alert triggers if they stay >15 mins.</p>
+                            <p class="text-[10px] text-black mt-1">Stranger driving your car. GPS tracking ensures adherence to route.</p>
                         </div>
                     </div>
                 </div>
@@ -551,28 +637,23 @@
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-brand transition-all duration-300" id="card-dating">
                     <div class="flex justify-between items-start">
                         <div class="h-10 w-10 bg-teal-100 text-teal-600 rounded-lg flex items-center justify-center text-xl mb-4">🥂</div>
-                        <button onclick="toggleScenarios('dating')" class="text-xs text-teal-600 font-semibold hover:underline focus:outline-none">View Scenarios ▼</button>
+                        <button onclick="toggleScenarios('dating')" class="text-xs text-teal-600 font-semibold hover:underline focus:outline-none">View ▼</button>
                     </div>
                     <h3 class="font-bold text-lg mb-2 text-slate-900">Dating Mode</h3>
                     <p class="text-sm text-black mb-4">For meeting new matches.</p>
                     <div class="bg-slate-50 p-3 rounded-lg text-xs mb-4 text-black">
-                        <strong>POC Feature:</strong> "Get Out" button triggers a fake incoming call from your "Landlord" for a polite exit.
+                        <strong>POC Feature:</strong> "Get Out" button triggers a fake incoming call for a polite exit.
                     </div>
 
                     <!-- Expanded Scenarios -->
                     <div id="scenarios-dating" class="hidden space-y-3 mt-4 pt-4 border-t border-slate-100 animate-fade-in-active">
-                        <div class="text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">Real World Examples</div>
                         <div class="p-2 bg-slate-50 rounded border border-slate-100">
                             <div class="text-xs font-bold text-black">The "Bad Vibe" Exit</div>
-                            <p class="text-[10px] text-black mt-1">Discreetly triggering a fake emergency call to leave a date early without confrontation.</p>
+                            <p class="text-[10px] text-black mt-1">Discreetly triggering a fake emergency call to leave early.</p>
                         </div>
                         <div class="p-2 bg-slate-50 rounded border border-slate-100">
                             <div class="text-xs font-bold text-black">Going Private</div>
-                            <p class="text-[10px] text-black mt-1">Transitioning from a public bar to a private apartment. Logs the new address instantly.</p>
-                        </div>
-                        <div class="p-2 bg-slate-50 rounded border border-slate-100">
-                            <div class="text-xs font-bold text-black">Drink Safety</div>
-                            <p class="text-[10px] text-black mt-1">Setting a short 5-min timer while leaving a drink unattended or going to the restroom.</p>
+                            <p class="text-[10px] text-black mt-1">Transitioning from public bar to private apartment. Logs address.</p>
                         </div>
                     </div>
                 </div>
@@ -581,24 +662,19 @@
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-brand transition-all duration-300" id="card-ride">
                     <div class="flex justify-between items-start">
                         <div class="h-10 w-10 bg-indigo-100 text-indigo-600 rounded-lg flex items-center justify-center text-xl mb-4">🚖</div>
-                        <button onclick="toggleScenarios('ride')" class="text-xs text-indigo-600 font-semibold hover:underline focus:outline-none">View Scenarios ▼</button>
+                        <button onclick="toggleScenarios('ride')" class="text-xs text-indigo-600 font-semibold hover:underline focus:outline-none">View ▼</button>
                     </div>
                     <h3 class="font-bold text-lg mb-2 text-slate-900">Ride Mode</h3>
                     <p class="text-sm text-black mb-4">For solo travel & rideshares.</p>
                     <div class="bg-slate-50 p-3 rounded-lg text-xs mb-4 text-black">
-                        <strong>POC Feature:</strong> Route monitoring alerts you if the driver stops unexpectedly or goes off-course.
+                        <strong>POC Feature:</strong> Route monitoring alerts you if driver stops unexpectedly.
                     </div>
 
                     <!-- Expanded Scenarios -->
                     <div id="scenarios-ride" class="hidden space-y-3 mt-4 pt-4 border-t border-slate-100 animate-fade-in-active">
-                        <div class="text-xs text-slate-400 font-bold uppercase tracking-wider mb-2">Real World Examples</div>
                         <div class="p-2 bg-slate-50 rounded border border-slate-100">
                             <div class="text-xs font-bold text-black">The "Off-Route" Alert</div>
-                            <p class="text-[10px] text-black mt-1">Driver takes a shortcut through a secluded area or stops unexpectedly.</p>
-                        </div>
-                        <div class="p-2 bg-slate-50 rounded border border-slate-100">
-                            <div class="text-xs font-bold text-black">Late Night Solo</div>
-                            <p class="text-[10px] text-black mt-1">Returning home alone at 2 AM. Aggressive check-ins until you are inside.</p>
+                            <p class="text-[10px] text-black mt-1">Driver takes a shortcut through a secluded area.</p>
                         </div>
                         <div class="p-2 bg-slate-50 rounded border border-slate-100">
                             <div class="text-xs font-bold text-black">Foreign Travel</div>
@@ -606,6 +682,36 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Student Mode (NEW) -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-brand transition-all duration-300" id="card-student">
+                    <div class="flex justify-between items-start">
+                        <div class="h-10 w-10 bg-emerald-100 text-emerald-600 rounded-lg flex items-center justify-center text-xl mb-4">🎒</div>
+                        <button onclick="toggleScenarios('student')" class="text-xs text-emerald-600 font-semibold hover:underline focus:outline-none">View ▼</button>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 text-slate-900">Student Mode</h3>
+                    <p class="text-sm text-black mb-4">For school commutes & hangouts.</p>
+                    <div class="bg-slate-50 p-3 rounded-lg text-xs mb-4 text-black">
+                        <strong>POC Feature:</strong> "Safe Passage" combines a timer with a GPS Geofence destination.
+                    </div>
+
+                    <!-- Expanded Scenarios -->
+                    <div id="scenarios-student" class="hidden space-y-3 mt-4 pt-4 border-t border-slate-100 animate-fade-in-active">
+                        <div class="p-2 bg-slate-50 rounded border border-slate-100">
+                            <div class="text-xs font-bold text-black">The Bus Ride</div>
+                            <p class="text-[10px] text-black mt-1">Alerts parent only if the bus stops for >15 mins in an unusual spot.</p>
+                        </div>
+                        <div class="p-2 bg-slate-50 rounded border border-slate-100">
+                            <div class="text-xs font-bold text-black">Mall Perimeter</div>
+                            <p class="text-[10px] text-black mt-1">Parents get alerted only if the child leaves the designated "Mall Zone".</p>
+                        </div>
+                        <div class="p-2 bg-slate-50 rounded border border-slate-100">
+                            <div class="text-xs font-bold text-black">Walking Home</div>
+                            <p class="text-[10px] text-black mt-1">Timer set for 20 mins. If not at "Home" GPS by then, alert sent.</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -904,7 +1010,9 @@
                     <div class="text-[#4292c6] font-bold tracking-wider text-xs mb-2">FUTURE GROWTH</div>
                     <h3 class="text-2xl font-bold mb-4">The "Guardian" Model</h3>
                     <p class="text-sm text-slate-400 leading-relaxed mb-6">
-                        We monetize the protector's anxiety, not the user's. Parents pay the subscription; the app remains free for the teen.
+                        We monetize the protector's anxiety, not the user's. Parents pay the subscription; the app remains free for the teen. 
+                        <br><br>
+                        <strong>Student Mode</strong> acts as a "privacy-first" alternative to Life360, alerting parents only when safety parameters (Geofence/Time) are breached.
                     </p>
                     <h3 class="text-xl font-bold mb-4 mt-8">B2B Trust API</h3>
                     <p class="text-sm text-slate-400 leading-relaxed">
@@ -1420,31 +1528,82 @@
             if(viewfinder) viewfinder.classList.remove('hidden');
         }
 
-        // --- 911 DISPATCH DEMO LOGIC ---
-        window.simulateDispatch = async function() {
-            const log = document.getElementById('dispatch-log');
-            log.innerHTML = ''; // Clear
-            
-            const messages = [
-                { text: "> SOS TRIGGERED. INITIATING PROTOCOL...", delay: 0, color: "text-red-500 font-bold" },
-                { text: "> Encrypting Evidence Package...", delay: 400, color: "text-green-400" },
-                { text: "> Uploading to Secure Vault (2MB)... 100%", delay: 1200, color: "text-green-400" },
-                { text: "> Connecting to Noonlight Dispatch API...", delay: 1800, color: "text-yellow-400" },
-                { text: "> CONNECTION ESTABLISHED [ID: #99281]", delay: 2600, color: "text-green-400 font-bold" },
-                { text: "> Transmitting GPS: 33.1234, -96.5678", delay: 3000, color: "text-blue-400" },
-                { text: "> Transmitting User Profile: Gabe (30)", delay: 3400, color: "text-blue-400" },
-                { text: "> DISPATCHER 'SARAH' JOINED SESSION", delay: 4200, color: "text-white bg-blue-600 px-1" },
-                { text: "Sarah: 'This is 911 Dispatch. We have your location. Police are en route.'", delay: 5000, color: "text-white italic" }
-            ];
+        // --- STUDENT MODE SIM LOGIC ---
+        window.startStudentSim = function(mode) {
+            const avatar = document.getElementById('student-avatar');
+            const timerUI = document.getElementById('student-timer-ui');
+            const countdown = document.getElementById('student-countdown');
+            const alertBox = document.getElementById('parent-alert');
+            const alertMsg = document.getElementById('parent-alert-msg');
+            const resetBtn = document.getElementById('student-reset');
 
-            for (let msg of messages) {
-                await new Promise(r => setTimeout(r, msg.delay - (messages[messages.indexOf(msg)-1]?.delay || 0)));
-                const div = document.createElement('div');
-                div.className = msg.color;
-                div.innerText = msg.text;
-                log.appendChild(div);
-                log.scrollTop = log.scrollHeight;
+            // Reset State
+            avatar.style.transition = 'none';
+            avatar.style.left = '35px';
+            avatar.style.top = '35px';
+            alertBox.classList.remove('opacity-100', 'scale-100');
+            alertBox.classList.add('opacity-0', 'scale-90');
+            timerUI.classList.add('hidden');
+            resetBtn.classList.add('hidden');
+            
+            // Force Reflow
+            void avatar.offsetWidth;
+
+            if (mode === 'timer') {
+                // 1. Show Timer
+                timerUI.classList.remove('hidden');
+                countdown.innerText = "00:05"; // Fast forward
+                
+                // 2. Move Avatar Halfway
+                avatar.style.transition = 'all 3s linear';
+                avatar.style.left = '120px';
+                avatar.style.top = '180px';
+
+                // 3. Timer Countdown Sim
+                let time = 5;
+                const interval = setInterval(() => {
+                    time--;
+                    countdown.innerText = `00:0${time}`;
+                    if(time <= 0) {
+                        clearInterval(interval);
+                        // Trigger Alert
+                        alertMsg.innerText = "Alert: Alex missed check-in deadline.";
+                        alertBox.classList.remove('opacity-0', 'scale-90');
+                        alertBox.classList.add('opacity-100', 'scale-100');
+                        resetBtn.classList.remove('hidden');
+                    }
+                }, 600);
+
+            } else if (mode === 'sos') {
+                // 1. Immediate Alert
+                avatar.innerHTML = "🆘";
+                avatar.classList.add('animate-bounce');
+                
+                setTimeout(() => {
+                    alertMsg.innerText = "EMERGENCY: Alex triggered SOS button.";
+                    alertBox.classList.remove('opacity-0', 'scale-90');
+                    alertBox.classList.add('opacity-100', 'scale-100');
+                    resetBtn.classList.remove('hidden');
+                }, 500);
             }
+        }
+
+        window.resetStudentSim = function() {
+            const avatar = document.getElementById('student-avatar');
+            const timerUI = document.getElementById('student-timer-ui');
+            const alertBox = document.getElementById('parent-alert');
+            const resetBtn = document.getElementById('student-reset');
+
+            alertBox.classList.remove('opacity-100', 'scale-100');
+            alertBox.classList.add('opacity-0', 'scale-90');
+            timerUI.classList.add('hidden');
+            resetBtn.classList.add('hidden');
+            
+            avatar.style.transition = 'all 1s ease';
+            avatar.style.left = '35px';
+            avatar.style.top = '35px';
+            avatar.innerHTML = "🎒";
+            avatar.classList.remove('animate-bounce');
         }
 
         // --- TECH DEMO LOGIC ---
